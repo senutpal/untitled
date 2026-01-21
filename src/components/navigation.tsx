@@ -30,7 +30,7 @@ export function Navigation() {
   const dockItems = NAV_ITEMS.map((item) => ({
     id: item.id,
     label: item.label,
-    icon: ICON_MAP[item.id],
+    icon: ICON_MAP[item.id] || <Home className="h-5 w-5" />,
     href: item.href,
     isActive: activeSection === item.href,
   }));
