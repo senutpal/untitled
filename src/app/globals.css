@@ -15,7 +15,7 @@
   --primary-foreground: hsl(0 0% 98%);
   --secondary: hsl(0 0% 96%);
   --secondary-foreground: hsl(0 0% 9%);
-  --muted: hsl(0 0% 96%);
+  --muted: hsl(0 0% 90%);
   --muted-foreground: hsl(0 0% 45%);
   --accent: hsl(0 0% 96%);
   --accent-foreground: hsl(0 0% 9%);
@@ -36,7 +36,27 @@
   --side-margin: 1.5rem;
 
   /* Motion */
-  --spring-snappy: 550ms linear(0, 0.1719, 0.4986, 0.7952, 0.9887, 1.0779, 1.0939, 1.0726, 1.0412, 1.0148, 0.9986, 0.9919, 0.9913, 0.9937, 0.9967, 0.999, 1.0003, 1);
+  --spring-snappy: 550ms
+    linear(
+      0,
+      0.1719,
+      0.4986,
+      0.7952,
+      0.9887,
+      1.0779,
+      1.0939,
+      1.0726,
+      1.0412,
+      1.0148,
+      0.9986,
+      0.9919,
+      0.9913,
+      0.9937,
+      0.9967,
+      0.999,
+      1.0003,
+      1
+    );
   --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
   --duration-fast: 150ms;
   --duration-normal: 300ms;
@@ -138,6 +158,141 @@ body {
 }
 
 /* ============================================
+   GLOWING BORDER - @property declarations
+   CRITICAL: Must be at root level for animation
+   ============================================ */
+@property --glow-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --glow-hue {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --glow-trail-length {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 12%;
+}
+
+/* ============================================
+   GLOWING BORDER - Keyframes
+   ============================================ */
+@keyframes glow-spin {
+  0% {
+    --glow-angle: 0deg;
+  }
+  100% {
+    --glow-angle: 360deg;
+  }
+}
+
+@keyframes glow-hue-cycle {
+  0% {
+    --glow-hue: 0;
+  }
+  100% {
+    --glow-hue: 360;
+  }
+}
+
+/* ============================================
+   GLOWING BORDER - Container
+   Clean colored line traveling around border
+   NO glow, NO shadow, single solid color
+   ============================================ */
+.glowing-border {
+  --glow-speed: 4s;
+  --glow-hue-speed: 10s;
+  --glow-size: 2px;
+  --glow-radius: 1rem;
+  --glow-trail-length: 12%;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--glow-radius);
+  z-index: 1;
+  padding: var(--glow-size);
+}
+
+/* The traveling colored line */
+.glowing-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--glow-radius);
+  z-index: -1;
+
+  /* Solid single color background - changes with hue */
+  background: hsl(calc(var(--glow-hue) * 1deg) 100% 50%);
+
+  /* Conic gradient MASK - creates the trail effect */
+  mask: conic-gradient(
+    from var(--glow-angle),
+    transparent 0%,
+    black 2%,
+    black var(--glow-trail-length),
+    transparent calc(var(--glow-trail-length) + 2%)
+  );
+  -webkit-mask: conic-gradient(
+    from var(--glow-angle),
+    transparent 0%,
+    black 2%,
+    black var(--glow-trail-length),
+    transparent calc(var(--glow-trail-length) + 2%)
+  );
+
+  animation:
+    glow-spin var(--glow-speed) linear infinite,
+    glow-hue-cycle var(--glow-hue-speed) linear infinite;
+
+  /* Smooth transition for trail length on hover */
+  transition: --glow-trail-length 0.4s ease;
+}
+
+/* Inner mask to create hollow border (not filled rectangle) */
+.glowing-border::after {
+  content: "";
+  position: absolute;
+  inset: var(--glow-size);
+  border-radius: calc(var(--glow-radius) - var(--glow-size));
+  z-index: -1;
+  background: var(--background);
+}
+
+/* Content wrapper */
+.glowing-border-content {
+  position: relative;
+  z-index: 1;
+  border-radius: calc(var(--glow-radius) - var(--glow-size));
+}
+
+/* ============================================
+   GLOWING BORDER - Hover states
+   Expands trail to complete border, animation continues
+   ============================================ */
+.glowing-border:hover::before {
+  --glow-trail-length: 100%;
+}
+
+/* ============================================
+   GLOWING BORDER - Reduced motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .glowing-border::before {
+    animation: none !important;
+    --glow-angle: 45deg;
+    --glow-hue: 200;
+  }
+}
+
+/* ============================================
    REDUCED MOTION
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
@@ -180,7 +335,11 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: color-mix(in srgb, var(--muted-foreground) 50%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--muted-foreground) 50%,
+    transparent
+  );
   border-radius: 4px;
 }
 
@@ -293,7 +452,10 @@ body {
   }
 
   /* Ensure text is visible */
-  p, li, span, div {
+  p,
+  li,
+  span,
+  div {
     color: black !important;
   }
 
@@ -314,13 +476,16 @@ body {
   }
 
   /* Orphan/widow control */
-  p, h2, h3 {
+  p,
+  h2,
+  h3 {
     orphans: 3;
     widows: 3;
   }
 
   /* Page break controls */
-  h2, h3 {
+  h2,
+  h3 {
     page-break-after: avoid;
   }
 }
