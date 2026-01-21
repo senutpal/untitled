@@ -19,5 +19,7 @@ export function useReducedMotion(): boolean {
     return () => mediaQuery.removeEventListener("change", callback);
   };
 
-  return React.useSyncExternalStore(subscribe, getSnapshot);
+  const getServerSnapshot = () => false;
+
+  return React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
