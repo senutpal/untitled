@@ -25,7 +25,7 @@ export function GameCard({ game, index, onClick }: GameCardProps) {
         ease: [0.33, 1, 0.68, 1],
       }}
     >
-      <button onClick={onClick} className="w-full text-left">
+      <button type="button" onClick={onClick} className="w-full text-left">
         <Card className="group transition-all hover:shadow-md hover:scale-[1.02]">
           <CardContent className="p-6">
             <GameCardIcon icon={game.icon} />

@@ -128,6 +128,7 @@ function MemoryCard({ card, onClick }: { card: Card; onClick: () => void }) {
 
   return (
     <button
+      type="button"
       onClick={onClick}
       aria-label={showEmoji ? `Card showing ${card.emoji}` : "Hidden card"}
       className={cn(
