@@ -44,13 +44,26 @@ const MOVES: Record<Direction, (head: Position) => Position> = {
 };
 
 function generateFood(snake: Position[]): Position {
+  // Check if grid is full
+  if (snake.length >= GRID_SIZE * GRID_SIZE) {
+    return { x: -1, y: -1 }; // Signal grid is full
+  }
+  
   let newFood: Position;
+  let attempts = 0;
+  const maxAttempts = GRID_SIZE * GRID_SIZE;
+  
   do {
     newFood = {
       x: Math.floor(Math.random() * GRID_SIZE),
       y: Math.floor(Math.random() * GRID_SIZE),
     };
-  } while (snake.some((s) => s.x === newFood.x && s.y === newFood.y));
+    attempts++;
+  } while (
+    attempts < maxAttempts && 
+    snake.some((s) => s.x === newFood.x && s.y === newFood.y)
+  );
+  
   return newFood;
 }
 
@@ -113,7 +126,20 @@ export function SnakeGame() {
         const head = prev.snake[0];
         const newHead = MOVES[prev.direction](head);
 
-        if (checkCollision(newHead, prev.snake)) {
+        // Check if new head overlaps with current tail (when not eating)
+        const willGrow = newHead.x === prev.food.x && newHead.y === prev.food.y;
+        const currentTail = prev.snake[prev.snake.length - 1];
+        const isTailMovement = !willGrow && 
+                               currentTail && 
+                               newHead.x === currentTail.x && 
+                               newHead.y === currentTail.y;
+
+        // Create temporary snake for collision check
+        const snakeForCollision = isTailMovement 
+          ? prev.snake.slice(0, -1)  // Exclude tail from collision check
+          : prev.snake;
+
+        if (checkCollision(newHead, snakeForCollision)) {
           return { ...prev, gameOver: true, isPlaying: false };
         }
 
@@ -123,7 +149,12 @@ export function SnakeGame() {
 
         if (newHead.x === prev.food.x && newHead.y === prev.food.y) {
           newScore = prev.score + 1;
-          newFood = generateFood(newSnake);
+          const generatedFood = generateFood(newSnake);
+          if (generatedFood.x === -1) {
+            // Grid is full - player wins!
+            return { ...prev, snake: newSnake, score: newScore, gameOver: true, isPlaying: false };
+          }
+          newFood = generatedFood;
         } else {
           newSnake.pop();
         }

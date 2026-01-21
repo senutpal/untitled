@@ -20,7 +20,7 @@ export function TypingGame() {
   const [isComplete, setIsComplete] = React.useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const startNewGame = () => {
+  const startNewGame = React.useCallback(() => {
     const randomText = SAMPLE_TEXTS[Math.floor(Math.random() * SAMPLE_TEXTS.length)];
     setText(randomText);
     setInput("");
@@ -29,11 +29,11 @@ export function TypingGame() {
     setAccuracy(null);
     setIsComplete(false);
     inputRef.current?.focus();
-  };
+  }, []);
 
   React.useEffect(() => {
     startNewGame();
-  }, []);
+  }, [startNewGame]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -46,7 +46,7 @@ export function TypingGame() {
 
     if (value === text) {
       const endTime = Date.now();
-      const timeInMinutes = (endTime - (startTime || endTime)) / 60000;
+      const timeInMinutes = Math.max((endTime - (startTime || endTime)) / 60000, 0.0001);
       const wordCount = text.split(" ").length;
       const calculatedWpm = Math.round(wordCount / timeInMinutes);
 
