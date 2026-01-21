@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useMemo } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
 import { Home, ArrowLeft, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -167,6 +168,7 @@ function SlidingPuzzle() {
 }
 
 export default function NotFound() {
+  const router = useRouter();
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-8 px-4">
       <div className="text-center">
@@ -193,11 +195,9 @@ export default function NotFound() {
             Back to home
           </Link>
         </Button>
-        <Button asChild>
-          <Link href="/" className="gap-2">
-            <Home className="h-4 w-4" />
-            Home
-          </Link>
+        <Button onClick={() => router.back()} className="gap-2">
+          <Home className="h-4 w-4" />
+          Go back
         </Button>
       </div>
     </div>
