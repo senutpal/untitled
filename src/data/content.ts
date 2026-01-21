@@ -1,6 +1,6 @@
 // Portfolio data - centralized content management
 
-export const BIRTH_DATE = new Date("2003-04-15"); // Adjust to your actual birth date
+export const BIRTH_DATE = new Date(Date.UTC(2003, 3, 15)); // Adjust to your actual birth date
 
 export const PERSONAL_INFO = {
   name: "Utpal",
@@ -100,7 +100,7 @@ export const BLOG_POSTS: BlogPost[] = [
     id: "blog-1",
     title: "Building a Portfolio with Next.js",
     excerpt: "How I built this portfolio using modern web technologies.",
-    date: "Jan 2026",
+    date: "2026-01-15T00:00:00Z",
     readTime: "5 min",
     link: "/blog/portfolio",
   },
@@ -108,7 +108,7 @@ export const BLOG_POSTS: BlogPost[] = [
     id: "blog-2",
     title: "Why TypeScript is Worth It",
     excerpt: "The case for type safety in JavaScript projects.",
-    date: "Dec 2025",
+    date: "2025-12-15T00:00:00Z",
     readTime: "8 min",
     link: "/blog/typescript",
   },
@@ -116,7 +116,7 @@ export const BLOG_POSTS: BlogPost[] = [
     id: "blog-3",
     title: "The Art of Minimalism in Design",
     excerpt: "Less is more when it comes to user interfaces.",
-    date: "Nov 2025",
+    date: "2025-11-15T00:00:00Z",
     readTime: "4 min",
     link: "/blog/minimalism",
   },
