@@ -10,7 +10,7 @@ interface HeroTitleProps {
 
 export function HeroTitle({ className }: HeroTitleProps) {
   return (
-    <div className={cn("mb-4", className)}>
+    <div className={cn("mb-2", className)}>
       <TextReveal
         text={`hi, i'm ${PERSONAL_INFO.name.toLowerCase()}`}
         as="h1"

@@ -17,9 +17,9 @@ export function HeroSubtitle({ className }: HeroSubtitleProps) {
     <motion.p
       initial={prefersReducedMotion ? {} : { opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.8, duration: 0.4, ease: [0.33, 1, 0.68, 1] }}
+      transition={{ delay: 0.7, duration: 0.4, ease: [0.33, 1, 0.68, 1] }}
       className={cn(
-        "text-lg text-muted-foreground md:text-xl",
+        "font-medium tracking-normal mb-8 text-base text-muted-foreground md:mb-10 md:text-lg",
         className
       )}
     >
