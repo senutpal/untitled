@@ -74,7 +74,7 @@ function GameStatus({ currentPlayer, winner }: { currentPlayer: Player; winner: 
   if (winner) {
     return <p className="font-mono text-lg">{winner} wins!</p>;
   }
-  return <p className="font-mono text-lg">Player {currentPlayer}'s turn</p>;
+  return <p className="font-mono text-lg">Player {currentPlayer}&apos;s turn</p>;
 }
 
 function GameBoard({
@@ -111,6 +111,7 @@ function GameCell({
 }) {
   return (
     <button
+      type="button"
       onClick={onClick}
       disabled={disabled || !!value}
       className={cn(
