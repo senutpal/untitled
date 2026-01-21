@@ -180,9 +180,8 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--muted-foreground);
+  background-color: color-mix(in srgb, var(--muted-foreground) 50%, transparent);
   border-radius: 4px;
-  opacity: 0.5;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -243,7 +242,7 @@ body {
 
   /* Section spacing for print */
   section {
-    page-break-inside: avoid;
+    break-inside: avoid;
     margin-bottom: 1.5rem !important;
     padding: 0 !important;
     min-height: auto !important;
@@ -276,7 +275,7 @@ body {
   [class*="card"] {
     border: 1px solid hsl(0 0% 80%) !important;
     background: white !important;
-    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   /* Typography adjustments */
@@ -311,7 +310,7 @@ body {
   /* Ensure images print */
   img {
     max-width: 100% !important;
-    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   /* Orphan/widow control */
