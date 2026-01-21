@@ -89,11 +89,11 @@ function ProjectCardBody({ project }: { project: Project }) {
   );
 }
 
-function ProjectCardFooter({ project }: { project: Project }) {
+  function ProjectCardFooter({ project }: { project: Project }) {
   return (
     <div className="flex flex-wrap gap-2">
-      {project.tech.map((tech) => (
-        <TechBadge key={tech} tech={tech} />
+      {project.tech.map((tech, i) => (
+        <TechBadge key={`${tech}-${i}`} tech={tech} />
       ))}
     </div>
   );

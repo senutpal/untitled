@@ -46,7 +46,7 @@ export function FadeIn({
         delay,
         ease: [0.33, 1, 0.68, 1],
       }}
-      className={cn(className)}
+      className={className}
     >
       {children}
     </motion.div>

@@ -17,6 +17,10 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
   ({ className, src, alt, fallback, size = "md", ...props }, ref) => {
     const [hasError, setHasError] = React.useState(false);
 
+    React.useEffect(() => {
+      setHasError(false);
+    }, [src]);
+
     return (
       <div
         ref={ref}
