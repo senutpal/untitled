@@ -19,12 +19,9 @@ export function useAgeCounter(birthDate: Date, precision = 9): string {
     [birthDate, precision]
   );
 
-  const [age, setAge] = useState(getFormattedAge);
+  const [age, setAge] = useState(() => getFormattedAge());
 
   useEffect(() => {
-    // Update immediately on mount
-    setAge(getFormattedAge());
-
     const interval = setInterval(() => {
       setAge(getFormattedAge());
     }, UPDATE_INTERVAL_MS);
