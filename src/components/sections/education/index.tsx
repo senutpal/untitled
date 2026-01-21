@@ -1,5 +1,3 @@
-"use client";
-
 import { Container, Section, SectionTitle } from "@/components/layout";
 import { EDUCATION } from "@/data";
 import { TimelineItem } from "./timeline-item";

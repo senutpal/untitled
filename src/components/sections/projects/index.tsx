@@ -1,5 +1,3 @@
-"use client";
-
 import { Container, Section, SectionTitle } from "@/components/layout";
 import { PROJECTS } from "@/data";
 import { ProjectCard } from "./project-card";
