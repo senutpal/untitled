@@ -34,15 +34,15 @@ export function TextReveal({
   }
 
   return (
-    <Component ref={ref as React.RefObject<HTMLParagraphElement>} className={cn("flex flex-wrap", className)}>
+    <Component ref={ref as any} className={cn("flex flex-wrap", className)}>
       {elements.map((element, index) => (
         <motion.span
           key={`${element}-${index}`}
-          initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-          animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{
             duration: 0.4,
-            delay: delay + index * staggerDelay,
+            delay: Math.min(delay + index * staggerDelay, 2), // Cap delay to prevent excessive delays
             ease: [0.33, 1, 0.68, 1],
           }}
           className="inline-block"

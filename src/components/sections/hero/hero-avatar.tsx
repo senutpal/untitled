@@ -15,7 +15,7 @@ export function HeroAvatar({ className }: HeroAvatarProps) {
 
   return (
     <motion.div
-      initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.8 }}
+      initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
       className={cn("mb-8", className)}
