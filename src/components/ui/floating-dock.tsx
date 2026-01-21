@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { useReducedMotion, useMobile } from "@/hooks";
 import {
@@ -36,7 +36,6 @@ export function FloatingDock({ items, className }: FloatingDockProps) {
           "fixed bottom-6 left-1/2 z-50 -translate-x-1/2",
           className
         )}
-        role="navigation"
         aria-label="Main navigation"
       >
         <motion.div

@@ -10,6 +10,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
+      aria-label="Introductory hero section"
       className="relative flex min-h-screen items-center justify-center"
     >
       <Container className="flex flex-col items-center text-center">

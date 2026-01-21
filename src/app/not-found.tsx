@@ -154,15 +154,13 @@ function SlidingPuzzle() {
       </div>
       
       {isSolved && (
-        <motion.p
+        <motion.span
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           className="font-medium text-primary"
-          role="status"
-          aria-live="polite"
         >
-          Puzzle solved in {puzzleState.moves} moves!
-        </motion.p>
+          <output aria-live="polite">Puzzle solved in {puzzleState.moves} moves!</output>
+        </motion.span>
       )}
     </div>
   );
@@ -190,9 +188,9 @@ export default function NotFound() {
       
       <div className="flex gap-4">
         <Button variant="outline" asChild>
-          <Link href="/" className="gap-2">
+          <Link href="/" className="gap-2" aria-label="Go to home page">
             <ArrowLeft className="h-4 w-4" />
-            Go back
+            Back to home
           </Link>
         </Button>
         <Button asChild>
