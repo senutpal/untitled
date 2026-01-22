@@ -1,18 +1,21 @@
 // Portfolio data - centralized content management
 
-export const BIRTH_DATE = new Date(Date.UTC(2003, 3, 15)); // Adjust to your actual birth date
-
+export const BIRTH_DATE = new Date(Date.UTC(2005, 5, 16));
 export const PERSONAL_INFO = {
   name: "Utpal",
   tagline: "been here for",
   bio: {
-    tldr: "learnt by hacking around on the internet.",
-    line1: "i like technology and deep science.",
-    line2: "they make a dent in the universe.",
-    line3: "i write code and make zero mrr apps.",
+    tldr: "seeking full-stack roles",
+    line1: "into ai/ml, devops, scalable and distributed systems.",
+    line2: "building full-stack and mobile apps.",
+    line3: "create. explore. expand. conquer.",
     blogLink: "read my blogs here",
+    resumeLink: {
+      text: "resume",
+      url: "https://example.com/resume",
+    },
   },
-  avatar: "/avatar.jpg", // Add your avatar to public folder
+  avatar: "/avatar.jpg",
 };
 
 export interface Project {
