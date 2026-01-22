@@ -38,7 +38,7 @@ export function AnimatedLink({
   if (prefersReducedMotion) {
     return (
       <a
-        ref={ref as any}
+        ref={ref as React.Ref<HTMLAnchorElement>}
         href={href}
         target={target}
         rel={rel}
@@ -52,7 +52,7 @@ export function AnimatedLink({
 
   return (
     <motion.a
-      ref={ref as any}
+      ref={ref as React.Ref<HTMLAnchorElement>}
       href={href}
       target={target}
       rel={rel}

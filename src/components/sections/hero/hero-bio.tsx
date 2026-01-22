@@ -79,7 +79,11 @@ export function HeroBio({ className }: HeroBioProps) {
         <motion.span
           initial={prefersReducedMotion ? {} : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: BLOG_LINK_DELAY, duration: DIVIDER_ANIMATION_DURATION, ease: [0.33, 1, 0.68, 1] }}
+          transition={
+            prefersReducedMotion
+              ? { duration: 0 }
+              : { delay: BLOG_LINK_DELAY, duration: DIVIDER_ANIMATION_DURATION, ease: [0.33, 1, 0.68, 1] }
+          }
           className="text-muted-foreground"
         >
           |

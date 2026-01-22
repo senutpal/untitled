@@ -10,8 +10,9 @@ function calculateAge(birthDate: Date): number {
   return ageInYears;
 }
 
-// Use requestAnimationFrame for smooth ~60fps updates
+// Use requestAnimationFrame with throttling for smooth updates (~30fps)
 // This ensures digits increment smoothly (1, 2, 3, 4, 5...) instead of jumping
+// Throttling to ~30fps provides a good balance between smoothness and performance
 
 export function useAgeCounter(birthDate: Date, precision = 9): string {
   const getFormattedAge = useCallback(
@@ -36,11 +37,25 @@ export function useAgeCounter(birthDate: Date, precision = 9): string {
       frameRef.current = requestAnimationFrame(update);
     };
 
-    frameRef.current = requestAnimationFrame(update);
+    // Guard against SSR environments where requestAnimationFrame is not available
+    const scheduleUpdate = (): number | null => {
+      if (typeof requestAnimationFrame === "function") {
+        return requestAnimationFrame(update);
+      }
+      return null;
+    };
+
+    const cancelUpdate = (id: number | null) => {
+      if (id !== null && typeof cancelAnimationFrame === "function") {
+        cancelAnimationFrame(id);
+      }
+    };
+
+    frameRef.current = scheduleUpdate();
 
     return () => {
       if (frameRef.current !== null) {
-        cancelAnimationFrame(frameRef.current);
+        cancelUpdate(frameRef.current);
       }
     };
   }, [getFormattedAge]);

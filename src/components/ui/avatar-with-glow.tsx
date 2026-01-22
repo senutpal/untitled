@@ -5,6 +5,7 @@ import { PERSONAL_INFO } from "@/data";
 import { motion } from "motion/react";
 import { useReducedMotion } from "@/hooks";
 import * as React from "react";
+import Image from "next/image";
 import { GlowingBorder } from "./glowing-border";
 
 export interface AvatarWithGlowProps {
@@ -50,13 +51,15 @@ function AvatarImage({ src, alt }: { src: string; alt: string }) {
   }, [src]);
 
   return (
-    <div className="h-20 w-20 bg-muted md:h-24 md:w-24">
+    <div className="relative h-20 w-20 bg-muted md:h-24 md:w-24">
       {src && !hasError ? (
-        <img
+        <Image
           src={src}
           alt={alt}
-          className="h-full w-full object-cover"
+          fill
+          className="object-cover"
           onError={() => setHasError(true)}
+          sizes="(max-width: 768px) 80px, 96px"
         />
       ) : (
         <span className="flex h-full w-full items-center justify-center text-xl font-medium uppercase text-muted-foreground">
