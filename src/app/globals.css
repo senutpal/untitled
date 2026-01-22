@@ -24,6 +24,7 @@
   --border: hsl(0 0% 90%);
   --input: hsl(0 0% 90%);
   --ring: hsl(0 0% 4%);
+  --glow: hsl(0 0% 50%);
 
   /* Typography */
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -86,6 +87,7 @@
   --border: hsl(0 0% 18%);
   --input: hsl(0 0% 18%);
   --ring: hsl(0 0% 80%);
+  --glow: hsl(0 0% 60%);
 }
 
 /* ============================================
@@ -167,12 +169,6 @@ body {
   initial-value: 0deg;
 }
 
-@property --glow-hue {
-  syntax: "<number>";
-  inherits: false;
-  initial-value: 0;
-}
-
 @property --glow-trail-length {
   syntax: "<percentage>";
   inherits: false;
@@ -191,23 +187,13 @@ body {
   }
 }
 
-@keyframes glow-hue-cycle {
-  0% {
-    --glow-hue: 0;
-  }
-  100% {
-    --glow-hue: 360;
-  }
-}
-
 /* ============================================
-   GLOWING BORDER - Container
+    GLOWING BORDER - Container
    Clean colored line traveling around border
    NO glow, NO shadow, single solid color
    ============================================ */
 .glowing-border {
   --glow-speed: 4s;
-  --glow-hue-speed: 10s;
   --glow-size: 2px;
   --glow-radius: 1rem;
   --glow-trail-length: 12%;
@@ -229,8 +215,8 @@ body {
   border-radius: var(--glow-radius);
   z-index: -1;
 
-  /* Solid single color background - changes with hue */
-  background: hsl(calc(var(--glow-hue) * 1deg) 100% 50%);
+  /* Solid monochrome color */
+  background: var(--glow);
 
   /* Conic gradient MASK - creates the trail effect */
   mask: conic-gradient(
@@ -248,9 +234,7 @@ body {
     transparent calc(var(--glow-trail-length) + 2%)
   );
 
-  animation:
-    glow-spin var(--glow-speed) linear infinite,
-    glow-hue-cycle var(--glow-hue-speed) linear infinite;
+  animation: glow-spin var(--glow-speed) linear infinite;
 
   /* Smooth transition for trail length on hover */
   transition: --glow-trail-length 0.4s ease;
@@ -288,7 +272,6 @@ body {
   .glowing-border::before {
     animation: none !important;
     --glow-angle: 45deg;
-    --glow-hue: 200;
   }
 }
 

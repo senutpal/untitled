@@ -31,7 +31,7 @@ export function AvatarWithGlow({
       {/* Avatar with glowing border and triple border effect */}
       <GlowingBorder className="relative z-20">
         {/* Muted thick border */}
-        <div className="rounded-[16px] bg-muted p-1.5 dark:bg-muted/55">
+        <div className="rounded-[16px] bg-muted p-1.5 dark:bg-muted/70">
           {/* Inner thin border */}
           <div className="overflow-hidden rounded-xl border border-border dark:border-border/30">
             <AvatarImage src={avatarSrc} alt={avatarAlt} />
