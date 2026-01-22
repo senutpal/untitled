@@ -19,12 +19,11 @@ export function HeroSubtitle({ className }: HeroSubtitleProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.7, duration: 0.4, ease: [0.33, 1, 0.68, 1] }}
       className={cn(
-        "font-medium tracking-normal mb-8 text-base text-muted-foreground md:mb-10 md:text-lg",
-        className
+        "font-medium text-base text-muted-foreground md:text-lg",
+        className,
       )}
     >
-      {PERSONAL_INFO.tagline}{" "}
-      <AgeCounter className="text-foreground" />{" "}
+      {PERSONAL_INFO.tagline} <AgeCounter className="text-foreground" />{" "}
       <span className="text-muted-foreground">years</span>
     </motion.p>
   );
