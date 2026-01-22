@@ -160,118 +160,142 @@ body {
 }
 
 /* ============================================
-   GLOWING BORDER - @property declarations
-   CRITICAL: Must be at root level for animation
-   ============================================ */
-@property --glow-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
+    GLOWING BORDER - @property declarations
+    CRITICAL: Must be at root level for animation
+    ============================================ */
 
-@property --glow-trail-length {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 12%;
-}
-
-/* ============================================
-   GLOWING BORDER - Keyframes
-   ============================================ */
-@keyframes glow-spin {
-  0% {
-    --glow-angle: 0deg;
+/* Fallback for browsers without @property support */
+@supports not (--glow-angle: 0deg) {
+  .glowing-border {
+    border: 2px solid var(--glow);
+    box-shadow: 0 0 8px var(--glow);
   }
-  100% {
-    --glow-angle: 360deg;
-  }
-}
 
-/* ============================================
-    GLOWING BORDER - Container
-   Clean colored line traveling around border
-   NO glow, NO shadow, single solid color
-   ============================================ */
-.glowing-border {
-  --glow-speed: 4s;
-  --glow-size: 2px;
-  --glow-radius: 1rem;
-  --glow-trail-length: 12%;
-
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--glow-radius);
-  z-index: 1;
-  padding: var(--glow-size);
-}
-
-/* The traveling colored line */
-.glowing-border::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: var(--glow-radius);
-  z-index: -1;
-
-  /* Solid monochrome color */
-  background: var(--glow);
-
-  /* Conic gradient MASK - creates the trail effect */
-  mask: conic-gradient(
-    from var(--glow-angle),
-    transparent 0%,
-    black 2%,
-    black var(--glow-trail-length),
-    transparent calc(var(--glow-trail-length) + 2%)
-  );
-  -webkit-mask: conic-gradient(
-    from var(--glow-angle),
-    transparent 0%,
-    black 2%,
-    black var(--glow-trail-length),
-    transparent calc(var(--glow-trail-length) + 2%)
-  );
-
-  animation: glow-spin var(--glow-speed) linear infinite;
-
-  /* Smooth transition for trail length on hover */
-  transition: --glow-trail-length 0.4s ease;
-}
-
-/* Inner mask to create hollow border (not filled rectangle) */
-.glowing-border::after {
-  content: "";
-  position: absolute;
-  inset: var(--glow-size);
-  border-radius: calc(var(--glow-radius) - var(--glow-size));
-  z-index: -1;
-  background: var(--background);
-}
-
-/* Content wrapper */
-.glowing-border-content {
-  position: relative;
-  z-index: 1;
-  border-radius: calc(var(--glow-radius) - var(--glow-size));
-}
-
-/* ============================================
-   GLOWING BORDER - Hover states
-   Expands trail to complete border, animation continues
-   ============================================ */
-.glowing-border:hover::before {
-  --glow-trail-length: 100%;
-}
-
-/* ============================================
-   GLOWING BORDER - Reduced motion
-   ============================================ */
-@media (prefers-reduced-motion: reduce) {
   .glowing-border::before {
-    animation: none !important;
-    --glow-angle: 45deg;
+    display: none;
+  }
+
+  .glowing-border::after {
+    display: none;
+  }
+
+  .glowing-border:hover::before {
+    --glow-trail-length: 100%;
+  }
+}
+
+/* Modern browsers with @property support */
+@supports (--glow-angle: 0deg) {
+  @property --glow-angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+  }
+
+  @property --glow-trail-length {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: 12%;
+  }
+
+  /* ============================================
+     GLOWING BORDER - Keyframes
+     ============================================ */
+  @keyframes glow-spin {
+    0% {
+      --glow-angle: 0deg;
+    }
+    100% {
+      --glow-angle: 360deg;
+    }
+  }
+
+  /* ============================================
+     GLOWING BORDER - Container
+     Clean colored line traveling around border
+     NO glow, NO shadow, single solid color
+     ============================================ */
+  .glowing-border {
+    --glow-speed: 4s;
+    --glow-size: 2px;
+    --glow-radius: 1rem;
+    --glow-trail-length: 12%;
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--glow-radius);
+    z-index: 1;
+    padding: var(--glow-size);
+  }
+
+  /* The traveling colored line */
+  .glowing-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--glow-radius);
+    z-index: -1;
+
+    /* Solid monochrome color */
+    background: var(--glow);
+
+    /* Conic gradient MASK - creates the trail effect */
+    mask: conic-gradient(
+      from var(--glow-angle),
+      transparent 0%,
+      black 2%,
+      black var(--glow-trail-length),
+      transparent calc(var(--glow-trail-length) + 2%)
+    );
+    -webkit-mask: conic-gradient(
+      from var(--glow-angle),
+      transparent 0%,
+      black 2%,
+      black var(--glow-trail-length),
+      transparent calc(var(--glow-trail-length) + 2%)
+    );
+
+    animation: glow-spin var(--glow-speed) linear infinite;
+
+    /* Smooth transition for trail length on hover */
+    transition: --glow-trail-length 0.4s ease;
+  }
+
+  /* Inner mask to create hollow border (not filled rectangle) */
+  .glowing-border::after {
+    content: "";
+    position: absolute;
+    inset: var(--glow-size);
+    border-radius: calc(var(--glow-radius) - var(--glow-size));
+    z-index: -1;
+    background: var(--background);
+  }
+
+  /* Content wrapper */
+  .glowing-border-content {
+    position: relative;
+    z-index: 1;
+    border-radius: calc(var(--glow-radius) - var(--glow-size));
+  }
+
+  /* ============================================
+     GLOWING BORDER - Hover states
+     Expands trail to complete border, animation continues
+     ============================================ */
+  .glowing-border:hover::before {
+    --glow-trail-length: 100%;
+  }
+
+  /* ============================================
+     GLOWING BORDER - Reduced motion
+     ============================================ */
+  @media (prefers-reduced-motion: reduce) {
+    .glowing-border::before {
+      animation: none !important;
+      --glow-angle: 45deg;
+    }
   }
 }
 

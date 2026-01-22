@@ -3,7 +3,7 @@
 import { type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-interface GlowingBorderProps {
+export interface GlowingBorderProps {
   children: ReactNode;
   className?: string;
 }
