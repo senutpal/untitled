@@ -23,7 +23,7 @@ export function HeroSubtitle({ className }: HeroSubtitleProps) {
         className,
       )}
     >
-      {PERSONAL_INFO.tagline} <AgeCounter className="text-foreground" />{" "}
+      {PERSONAL_INFO.tagline} <AgeCounter />{" "}
       <span className="text-muted-foreground">years</span>
     </motion.p>
   );

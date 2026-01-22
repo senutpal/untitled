@@ -26,15 +26,12 @@ export function HeroSection() {
         </div>
 
         {/* Bio content - stays below the aligned section */}
-        <div className="mt-8 md:mt-12">
+        <div className="mt-4">
           <HeroBio />
         </div>
 
         {/* Space reserved for future content: GitHub contributions, social links, etc. */}
-        <div
-          className="mt-8 md:mt-10"
-          aria-hidden="true"
-        />
+        <div className="mt-8 md:mt-10" aria-hidden="true" />
       </Container>
     </section>
   );
