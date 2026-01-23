@@ -14,8 +14,8 @@ export function HeroTitle({ className }: HeroTitleProps) {
       <TextReveal
         text={`hi, i'm ${PERSONAL_INFO.name.toLowerCase()}`}
         as="h1"
-        delay={0.3}
-        staggerDelay={0.04}
+        delay={0.18}
+        staggerDelay={0.02}
         className="text-3xl sm:text-4xl font-semibold tracking-tight md:text-4xl lg:text-5xl"
       />
     </div>

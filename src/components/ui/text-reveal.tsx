@@ -27,7 +27,6 @@ export function TextReveal({
   const prefersReducedMotion = useReducedMotion();
 
   const elements = animateBy === "word" ? text.split(" ") : text.split("");
-  const separator = animateBy === "word" ? " " : "";
 
   if (prefersReducedMotion) {
     return <Component className={className}>{text}</Component>;
@@ -41,7 +40,7 @@ export function TextReveal({
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{
-            duration: 0.4,
+            duration: 0.3,
             delay: Math.min(delay + index * staggerDelay, 2), // Cap delay to prevent excessive delays
             ease: [0.33, 1, 0.68, 1],
           }}
