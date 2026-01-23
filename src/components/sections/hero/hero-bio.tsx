@@ -9,14 +9,14 @@ import { TextReveal } from "@/components/ui/text-reveal";
 import { AnimatedLink } from "@/components/ui/animated-link";
 
 // Animation delays
-const TLDR_DELAY = 0.9;
-const LINE1_DELAY = 1.1;
-const LINE2_DELAY = 1.3;
-const LINE3_DELAY = 1.5;
-const RESUME_LINK_DELAY = 1.7;
-const BLOG_LINK_DELAY = 1.9;
-const DIVIDER_ANIMATION_DURATION = 0.4;
-const DIVIDER_STAGGER_DELAY = 0.02;
+const TLDR_DELAY = 0.54;
+const LINE1_DELAY = 0.66;
+const LINE2_DELAY = 0.78;
+const LINE3_DELAY = 0.9;
+const RESUME_LINK_DELAY = 1.02;
+const BLOG_LINK_DELAY = 1.14;
+const DIVIDER_ANIMATION_DURATION = 0.3;
+const DIVIDER_STAGGER_DELAY = 0.01;
 
 interface HeroBioProps {
   className?: string;

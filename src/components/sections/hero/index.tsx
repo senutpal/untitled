@@ -2,6 +2,7 @@
 
 import { Container } from "@/components/layout";
 import { AvatarWithGlow } from "@/components/ui/avatar-with-glow";
+import { GitHubContributions } from "@/components/ui/github-contributions";
 import { HeroTitle } from "./hero-title";
 import { HeroSubtitle } from "./hero-subtitle";
 import { HeroBio } from "./hero-bio";
@@ -30,8 +31,10 @@ export function HeroSection() {
           <HeroBio />
         </div>
 
-        {/* Space reserved for future content: GitHub contributions, social links, etc. */}
-        <div className="mt-8 md:mt-10" aria-hidden="true" />
+{/* GitHub Contributions */}
+        <div className="mt-8 md:mt-10">
+          <GitHubContributions />
+        </div>
       </Container>
     </section>
   );
