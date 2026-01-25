@@ -49,10 +49,18 @@ export function processData(activities: Activity[], days: number = 365): Activit
   alignedStart.setDate(targetStart.getDate() - dayOfWeek);
   alignedStart.setHours(0, 0, 0, 0);
 
+  const parseLocalDate = (value: string) => {
+    const [y, m, d] = value.split("-").map(Number);
+    return new Date(y, m - 1, d);
+  };
+
   return activities
     .filter((activity) => {
-      const date = new Date(activity.date);
+      const date = parseLocalDate(activity.date);
       return date >= alignedStart && date <= today;
     })
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    .sort(
+      (a, b) =>
+        parseLocalDate(a.date).getTime() - parseLocalDate(b.date).getTime(),
+    );
 }

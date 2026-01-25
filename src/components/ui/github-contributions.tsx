@@ -109,7 +109,13 @@ export function GitHubContributions() {
     0,
   );
 
-  if (error) return null;
+  if (error) {
+    return (
+      <div className="w-full flex justify-center items-center py-8 text-sm text-muted-foreground bg-muted/20 rounded-md">
+        GitHub contributions temporarily unavailable
+      </div>
+    );
+  }
 
   return (
     <motion.div
@@ -151,7 +157,7 @@ export function GitHubContributions() {
               <span className="font-medium text-foreground">
                 {totalContributions.toLocaleString()}
               </span>{" "}
-              activites in the last {period}
+              activities in the last {period}
             </span>
 
             <div className="flex items-center gap-1.5">

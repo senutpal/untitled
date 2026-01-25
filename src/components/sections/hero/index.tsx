@@ -31,7 +31,7 @@ export function HeroSection() {
           <HeroBio />
         </div>
 
-{/* GitHub Contributions */}
+        {/* GitHub Contributions */}
         <div className="mt-8 md:mt-10">
           <GitHubContributions />
         </div>
