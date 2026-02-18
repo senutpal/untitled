@@ -38,6 +38,16 @@ import StatusBar from '../components/StatusBar.astro';
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
+  <!-- JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Utpal",
+    "url": "https://utpal.dev",
+    "jobTitle": "Full-Stack Developer",
+    "knowsAbout": ["AI/ML", "DevOps", "Distributed Systems", "Full-Stack Development"],
+  })} />
+
   <!-- Dark mode: prevent flash -->
   <script is:inline>
     const theme = localStorage.getItem('theme');
