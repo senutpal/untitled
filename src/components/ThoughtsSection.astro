@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from './SectionHeader.astro';
+import BlogPostEntry from './BlogPostEntry.astro';
+
+const posts = (await getCollection('blog'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<section id="blogs" class="fade-on-scroll pb-12">
+  <SectionHeader title="thoughts" />
+  <div class="space-y-6">
+    {posts.map((post) => (
+      <BlogPostEntry
+        date={post.data.date}
+        title={post.data.title}
+        description={post.data.description}
+        slug={post.slug}
+      />
+    ))}
+  </div>
+</section>
