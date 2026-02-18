@@ -1,0 +1,43 @@
+---
+import SectionHeader from './SectionHeader.astro';
+---
+
+<section class="fade-on-scroll grid md:grid-cols-2 gap-12">
+  <div>
+    <SectionHeader title="about" />
+    <p class="leading-relaxed font-normal text-sm mb-6" style="color: var(--text-secondary);">
+      i build systems that scale and interfaces that disappear. obsessed with the intersection of distributed computing and minimal design. currently obsessing over rust and llm inference optimization.
+    </p>
+    <div class="space-y-2 font-mono text-xs" style="color: var(--text-secondary);">
+      <p>ts / go / react / postgres / redis / docker / aws</p>
+    </div>
+  </div>
+
+  <div>
+    <SectionHeader title="education" />
+    <div class="space-y-6">
+      <div class="group">
+        <div class="flex justify-between items-baseline mb-1">
+          <h3 class="font-semibold" style="color: var(--text-primary);">B.S. Computer Science</h3>
+          <span class="font-mono text-xs" style="color: var(--text-secondary);">2020 — 2024</span>
+        </div>
+        <div class="flex justify-between items-baseline">
+          <p class="text-sm" style="color: var(--text-secondary);">University of Technology</p>
+          <span class="font-mono text-xs" style="color: var(--text-secondary);">cgpa — 8.1</span>
+        </div>
+      </div>
+
+      <ul class="space-y-2 mt-4 text-sm list-none pl-0" style="color: var(--text-secondary);">
+        <li class="flex items-center gap-2">
+          <span class="w-1 h-1 rounded-full" style="background-color: var(--text-secondary);"></span> full-stack development
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-1 h-1 rounded-full" style="background-color: var(--text-secondary);"></span> ai/ml
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-1 h-1 rounded-full" style="background-color: var(--text-secondary);"></span> devops
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
