@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from './SectionHeader.astro';
+
+const allReading = await getCollection('reading');
+const books = allReading.filter((r) => r.data.type === 'book');
+const blogs = allReading.filter((r) => r.data.type === 'blog');
+const videos = allReading.filter((r) => r.data.type === 'video');
+
+const typeLabels: Record<string, { cta: string }> = {
+  book: { cta: 'link →' },
+  blog: { cta: 'read →' },
+  video: { cta: 'watch →' },
+};
+---
+
+<section class="fade-on-scroll">
+  <SectionHeader title="reading list" />
+  <div class="space-y-8">
+    {[
+      { label: 'books', items: books },
+      { label: 'blogs', items: blogs },
+      { label: 'videos', items: videos },
+    ].map(({ label, items }) => (
+      <div>
+        <h3 class="font-mono text-xs mb-4" style="color: var(--text-secondary);">{label}</h3>
+        <div class="space-y-4">
+          {items.map((item) => (
+            <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8 group cursor-pointer">
+              <div class="grow">
+                <h4 class="font-semibold transition-colors" style="color: var(--text-primary);">{item.data.title}</h4>
+                <p class="text-sm mt-1" style="color: var(--text-secondary);">
+                  {item.data.author}
+                  {item.data.status === 'reading' && ' · currently reading'}
+                  {item.data.status === 'on-deck' && ' · on deck'}
+                  {item.data.duration && ` · ${item.data.duration}`}
+                </p>
+              </div>
+              <a
+                href={item.data.url}
+                class="font-mono text-xs transition-colors shrink-0"
+                style="color: var(--text-secondary);"
+              >
+                {typeLabels[item.data.type].cta}
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
