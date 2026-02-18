@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GutterColumn from '../../components/GutterColumn.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import BlogPostEntry from '../../components/BlogPostEntry.astro';
+
+const posts = (await getCollection('blog'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout title="thoughts — utpal.dev" description="blog posts on systems programming, ai/ml, and software design">
+  <GutterColumn />
+  <main class="max-w-3xl mx-auto px-6 md:px-0 md:pl-16 pt-16 md:pt-24 space-y-12">
+    <SectionHeader title="all thoughts" />
+    <div class="space-y-6">
+      {posts.map((post) => (
+        <BlogPostEntry
+          date={post.data.date}
+          title={post.data.title}
+          description={post.data.description}
+          slug={post.slug}
+        />
+      ))}
+    </div>
+  </main>
+</BaseLayout>
