@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from './SectionHeader.astro';
+import ProjectCard from './ProjectCard.astro';
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<section class="fade-on-scroll">
+  <SectionHeader title="projects" />
+  <div class="grid md:grid-cols-2 gap-x-8 gap-y-12">
+    {projects.map((project) => (
+      <ProjectCard
+        name={project.data.name}
+        description={project.data.description}
+        tech={project.data.tech}
+        github={project.data.github}
+        demo={project.data.demo}
+      />
+    ))}
+  </div>
+
+  <div class="mt-8 text-center">
+    <a href="#" class="inline-flex items-center gap-2 font-mono text-sm transition-colors border-b pb-1 hover-link">
+      see more projects →
+    </a>
+  </div>
+</section>

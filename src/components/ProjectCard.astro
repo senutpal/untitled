@@ -1,0 +1,24 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  tech: string[];
+  github: string;
+  demo?: string;
+}
+const { name, description, tech, github, demo } = Astro.props;
+---
+
+<div class="group cursor-pointer">
+  <div class="flex justify-between items-baseline mb-2 border-b pb-2 transition-colors" style="border-color: var(--border);">
+    <h3 class="font-bold lowercase" style="color: var(--text-primary);">{name}</h3>
+    <div class="flex gap-3">
+      <a href={github} class="font-mono text-xs transition-colors" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'" aria-label={`${name} on GitHub`}>github →</a>
+      {demo && (
+        <a href={demo} class="font-mono text-xs transition-colors" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'" aria-label={`${name} live demo`}>live demo →</a>
+      )}
+    </div>
+  </div>
+  <p class="text-sm mb-3 leading-relaxed" style="color: var(--text-secondary);">{description}</p>
+  <p class="font-mono text-xs" style="color: var(--gutter-color);">{tech.join(' · ')}</p>
+</div>
