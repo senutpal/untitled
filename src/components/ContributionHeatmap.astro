@@ -1,0 +1,51 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import { fetchGitHubContributions } from '../lib/github';
+
+const data = await fetchGitHubContributions('utpal-dev'); // Replace with actual GitHub username
+
+function getColor(count: number): string {
+  if (count === 0) return 'bg-gray-100 dark:bg-gray-800';
+  if (count <= 2) return 'bg-gray-300 dark:bg-gray-700';
+  if (count <= 5) return 'bg-gray-500 dark:bg-gray-500';
+  if (count <= 8) return 'bg-gray-700 dark:bg-gray-400';
+  return 'bg-gray-900 dark:bg-gray-200';
+}
+
+const months = ['feb', 'may', 'aug', 'nov', 'jan'];
+---
+
+<section class="fade-on-scroll">
+  <SectionHeader title="contributions" />
+  <div class="border p-6 backdrop-blur-sm rounded-sm" style="border-color: var(--border); background-color: var(--surface);">
+    <div class="flex justify-between items-end mb-2 font-mono text-xs" style="color: var(--text-secondary);">
+      {months.map((m) => <span>{m}</span>)}
+    </div>
+
+    <div class="overflow-x-auto pb-2">
+      <div class="heatmap-grid w-full min-w-[600px]">
+        {data.weeks.flatMap((week) =>
+          week.contributionDays.map((day) => (
+            <div
+              class={`w-[10px] h-[10px] rounded-[1px] ${getColor(day.contributionCount)}`}
+              title={day.date ? `${day.date}: ${day.contributionCount} contributions` : undefined}
+            />
+          ))
+        )}
+      </div>
+    </div>
+
+    <div class="mt-3 flex justify-between items-center font-mono text-xs" style="color: var(--text-secondary);">
+      <span>{data.totalContributions} activities in the last year</span>
+      <div class="flex items-center gap-1">
+        <span>less</span>
+        <div class="w-2 h-2 bg-gray-100 dark:bg-gray-800 rounded-[1px]"></div>
+        <div class="w-2 h-2 bg-gray-300 dark:bg-gray-700 rounded-[1px]"></div>
+        <div class="w-2 h-2 bg-gray-500 rounded-[1px]"></div>
+        <div class="w-2 h-2 bg-gray-700 dark:bg-gray-400 rounded-[1px]"></div>
+        <div class="w-2 h-2 bg-gray-900 dark:bg-gray-200 rounded-[1px]"></div>
+        <span>more</span>
+      </div>
+    </div>
+  </div>
+</section>
