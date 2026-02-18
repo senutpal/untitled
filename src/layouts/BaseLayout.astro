@@ -48,6 +48,9 @@ import StatusBar from '../components/StatusBar.astro';
     "knowsAbout": ["AI/ML", "DevOps", "Distributed Systems", "Full-Stack Development"],
   })} />
 
+  <!-- Analytics -->
+  <script defer data-domain="utpal.dev" src="https://plausible.io/js/script.js"></script>
+
   <!-- Dark mode: prevent flash -->
   <script is:inline>
     const theme = localStorage.getItem('theme');
