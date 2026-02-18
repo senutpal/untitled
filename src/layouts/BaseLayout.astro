@@ -9,6 +9,7 @@ const { title, description = "utpal's portfolio — full-stack developer, ai/ml,
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 import '../styles/global.css';
+import StatusBar from '../components/StatusBar.astro';
 ---
 
 <!DOCTYPE html>
@@ -47,6 +48,7 @@ import '../styles/global.css';
 </head>
 <body class="pb-24">
   <slot />
+  <StatusBar />
 
   <!-- Fade-in observer -->
   <script is:inline>
