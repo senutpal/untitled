@@ -1,0 +1,123 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GutterColumn from '../../components/GutterColumn.astro';
+
+const posts = (await getCollection('blog'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const allTags = [...new Set(posts.flatMap((post) => post.data.tags))];
+
+function formatDate(date: Date) {
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  const y = date.getFullYear();
+  return `${m}.${d}.${y}`;
+}
+---
+
+<BaseLayout title="thoughts — utpal.dev" description="notes on distributed systems, frontend engineering, and building things that scale.">
+  <GutterColumn />
+  <main class="max-w-3xl mx-auto px-6 md:px-0 md:pl-16 pt-16 md:pt-24 min-h-screen">
+
+    <nav class="breadcrumb fade-in">
+      <a href="/" class="hover:text-accent transition-colors" style="color: var(--text-secondary);">~/home</a>
+      <span class="mx-2" style="color: var(--border);">/</span>
+      <span style="color: var(--text-primary);">thoughts</span>
+    </nav>
+
+    <section class="fade-in" style="animation-delay: 0.1s;">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div class="flex-1">
+          <h1 class="text-4xl font-semibold tracking-tight mb-4" style="color: var(--text-primary);">writing.</h1>
+          <p class="text-sm max-w-md" style="color: var(--text-secondary);">Notes on distributed systems, frontend engineering, and building things that scale.</p>
+        </div>
+        <div class="w-full md:w-64">
+          <div class="relative">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute right-0 top-2 w-4 h-4" style="color: var(--text-secondary);"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" placeholder="grep thoughts..." class="search-input" id="search-input" />
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3 mb-10 pb-6 border-b" style="border-color: var(--border);">
+        <span class="text-xs font-mono mr-2" style="color: var(--text-secondary);">filters:</span>
+        <button class="filter-tag active" data-tag="all">all</button>
+        {allTags.map((tag) => (
+          <button class="filter-tag" data-tag={tag}>{tag}</button>
+        ))}
+
+        <div class="ml-auto flex items-center gap-2">
+          <span class="text-xs font-mono" style="color: var(--text-secondary);">sort:</span>
+          <select id="sort-select" class="font-mono text-[11px] bg-transparent border-none outline-none cursor-pointer" style="color: var(--text-secondary);">
+            <option value="newest">newest_first</option>
+            <option value="oldest">oldest_first</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="fade-in space-y-2" style="animation-delay: 0.2s;">
+      <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-secondary);">// results</span>
+
+      <div id="posts-list">
+        {posts.map((post) => (
+          <a href={`/thoughts/${post.slug}`} class="post-card group cursor-pointer block" data-tags={post.data.tags.join(',')} data-date={post.data.date.toISOString()} data-title={post.data.title.toLowerCase()}>
+            <div class="flex justify-between items-baseline mb-2">
+              <h3 class="text-xl font-semibold transition-colors" style="color: var(--text-primary);">{post.data.title}</h3>
+              <span class="font-mono text-xs" style="color: var(--text-secondary);">{formatDate(post.data.date)}</span>
+            </div>
+            <p class="text-sm leading-relaxed mb-4 max-w-2xl" style="color: var(--text-secondary);">
+              {post.data.description}
+            </p>
+            <div class="flex items-center gap-6 font-mono text-[10px] uppercase tracking-widest" style="color: var(--text-secondary);">
+              {post.data.readingTime && (
+                <span class="flex items-center gap-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  {post.data.readingTime}
+                </span>
+              )}
+              {post.data.tags[0] && (
+                <span class="flex items-center gap-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+                  {post.data.tags[0]}
+                </span>
+              )}
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="pt-12 text-center">
+        <p class="font-mono text-xs" style="color: var(--text-secondary);">-- end of directory --</p>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    // Filter tags
+    document.querySelectorAll('.filter-tag').forEach(tag => {
+      tag.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+        tag.classList.add('active');
+        filterPosts();
+      });
+    });
+
+    // Search
+    document.getElementById('search-input')?.addEventListener('input', filterPosts);
+
+    function filterPosts() {
+      const activeTag = document.querySelector('.filter-tag.active')?.getAttribute('data-tag') || 'all';
+      const search = (document.getElementById('search-input')?.value || '').toLowerCase();
+      document.querySelectorAll('.post-card').forEach(card => {
+        const tags = card.getAttribute('data-tags') || '';
+        const title = card.getAttribute('data-title') || '';
+        const tagMatch = activeTag === 'all' || tags.includes(activeTag);
+        const searchMatch = !search || title.includes(search);
+        card.style.display = tagMatch && searchMatch ? '' : 'none';
+      });
+    }
+  </script>
+</BaseLayout>

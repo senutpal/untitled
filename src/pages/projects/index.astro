@@ -1,0 +1,145 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GutterColumn from '../../components/GutterColumn.astro';
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const allTags = [...new Set(projects.flatMap((p) => p.data.tech))];
+---
+
+<BaseLayout title="projects — utpal.dev" description="a collection of systems, experiments, and open-source contributions.">
+  <GutterColumn />
+  <main class="max-w-5xl mx-auto px-6 md:px-0 md:pl-16 pt-16 md:pt-24">
+
+    <header class="mb-16 fade-in">
+      <a href="/" class="font-mono text-xs transition-colors mb-8 inline-block hover:text-accent" style="color: var(--text-secondary);">&larr; cd ..</a>
+      <h1 class="text-4xl font-medium tracking-tight mb-4" style="color: var(--text-primary);">projects.exe</h1>
+      <p class="max-w-2xl font-light" style="color: var(--text-secondary);">
+        a collection of systems, experiments, and open-source contributions. filtered by technical stack.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-2">
+        <button class="tag-btn active" data-tag="all">all</button>
+        {allTags.map((tag) => (
+          <button class="tag-btn" data-tag={tag}>{tag}</button>
+        ))}
+      </div>
+    </header>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8 fade-in" style="animation-delay: 0.2s;" id="projects-grid">
+      {projects.map((project) => (
+        <a href={`/projects/${project.slug}`} class="project-card flex flex-col group" data-tech={project.data.tech.join(',')}>
+          <div class="project-preview">
+            {project.data.previewType === 'terminal' && (
+              <div class="w-full h-full bg-[#0d1117] flex flex-col p-4 font-mono text-[10px] text-green-500/80">
+                <div>&gt; Initializing {project.data.name} node...</div>
+                <div>&gt; Loading vector space [1,048,576 records]</div>
+                <div>&gt; Index HNSW built in 442ms</div>
+                <div class="mt-auto opacity-40">utpal@dev:~/projects/{project.data.name}$ _</div>
+              </div>
+            )}
+            {project.data.previewType === 'browser' && (
+              <div class="w-full h-full bg-gray-100 dark:bg-gray-800 p-8 flex items-center justify-center">
+                <div class="w-full max-w-xs border rounded shadow-lg overflow-hidden flex flex-col" style="background-color: var(--surface); border-color: var(--border);">
+                  <div class="h-6 border-b flex items-center px-2 gap-1" style="border-color: var(--border);">
+                    <div class="w-2 h-2 rounded-full bg-red-400"></div>
+                    <div class="w-2 h-2 rounded-full bg-yellow-400"></div>
+                    <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                  </div>
+                  <div class="p-4">
+                    <div class="h-24 w-full border border-dashed flex items-center justify-center font-mono text-[10px]" style="border-color: var(--border); color: var(--text-secondary);">
+                      [Canvas Rendering Context 2D]
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            {project.data.previewType === 'abstract' && (
+              <div class="bg-[#2d333b] w-full h-full flex items-center justify-center">
+                <div class="flex flex-col items-center gap-4">
+                  <div class="flex gap-2">
+                    <div class="w-8 h-8 rounded bg-blue-500 animate-pulse"></div>
+                    <div class="w-8 h-8 rounded bg-blue-500/50"></div>
+                    <div class="w-8 h-8 rounded bg-blue-500/20"></div>
+                  </div>
+                  <span class="font-mono text-xs text-gray-400">scaling cluster: us-east-1</span>
+                </div>
+              </div>
+            )}
+            {project.data.previewType === 'grid' && (
+              <div class="w-full h-full flex items-center justify-center" style="background-color: var(--surface);">
+                <div class="grid grid-cols-4 gap-2 w-48">
+                  <div class="h-12 bg-gray-100 dark:bg-gray-700 rounded-[1px]"></div>
+                  <div class="h-12 bg-green-200 dark:bg-green-800 rounded-[1px]"></div>
+                  <div class="h-12 bg-green-400 dark:bg-green-600 rounded-[1px]"></div>
+                  <div class="h-12 bg-gray-100 dark:bg-gray-700 rounded-[1px]"></div>
+                  <div class="h-12 bg-green-600 dark:bg-green-500 rounded-[1px]"></div>
+                  <div class="h-12 bg-green-200 dark:bg-green-800 rounded-[1px]"></div>
+                  <div class="h-12 bg-gray-100 dark:bg-gray-700 rounded-[1px]"></div>
+                  <div class="h-12 bg-green-800 dark:bg-green-400 rounded-[1px]"></div>
+                </div>
+              </div>
+            )}
+            {!project.data.previewType && (
+              <div class="w-full h-full flex items-center justify-center" style="background-color: var(--surface);">
+                <span class="font-mono text-xs" style="color: var(--text-secondary);">{project.data.name}</span>
+              </div>
+            )}
+          </div>
+          <div class="p-6 space-y-4 flex-grow flex flex-col">
+            <div class="flex justify-between items-start">
+              <h3 class="text-lg font-medium" style="color: var(--text-primary);">{project.data.name}</h3>
+              <div class="flex gap-3">
+                {project.data.stars && (
+                  <span class="github-stat">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    {project.data.stars >= 1000 ? `${(project.data.stars / 1000).toFixed(1)}k` : project.data.stars}
+                  </span>
+                )}
+                {project.data.forks && (
+                  <span class="github-stat">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"/><path d="M12 12v3"/></svg>
+                    {project.data.forks}
+                  </span>
+                )}
+              </div>
+            </div>
+            <p class="text-sm leading-relaxed font-light" style="color: var(--text-secondary);">
+              {project.data.description}
+            </p>
+            <div class="mt-auto pt-4 flex flex-wrap gap-2">
+              {project.data.tech.map((t) => (
+                <span class="font-mono text-[10px]" style="color: var(--accent);">#{t}</span>
+              ))}
+            </div>
+          </div>
+        </a>
+      ))}
+    </section>
+
+    <section class="mt-24 pb-20 fade-in" style="animation-delay: 0.3s;">
+      <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-secondary);">// more on github</span>
+      <div class="border border-dashed p-8 rounded-sm text-center" style="border-color: var(--border);">
+        <p class="text-sm mb-4" style="color: var(--text-secondary);">discover 40+ more repositories and forks</p>
+        <a href="https://github.com/utpal" class="hover-link font-mono text-xs">view profile &rarr;</a>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    // Tag filter
+    document.querySelectorAll('.tag-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const tag = btn.getAttribute('data-tag');
+        document.querySelectorAll('.project-card').forEach(card => {
+          const tech = card.getAttribute('data-tech') || '';
+          card.style.display = tag === 'all' || tech.includes(tag) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</BaseLayout>

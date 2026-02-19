@@ -12,6 +12,7 @@
   --color-accent: var(--accent);
   --color-surface: var(--surface);
   --color-border: var(--border);
+  --color-accent-blue: var(--accent-blue);
 }
 
 :root {
@@ -24,10 +25,11 @@
   --status-bar-bg: #e5e7eb;
   --status-bar-border: #d1d5db;
   --gutter-color: #9ca3af;
+  --accent-blue:#2563eb;
 }
 
 .dark {
-  --bg: #0f1117;
+  --bg: #000000;
   --text-primary: #e5e7eb;
   --text-secondary: #9ca3af;
   --accent: #818cf8;
@@ -36,6 +38,7 @@
   --status-bar-bg: #1f2937;
   --status-bar-border: #374151;
   --gutter-color: #4b5563;
+  --accent-blue:#3b82f6;
 }
 
 body {
@@ -68,6 +71,7 @@ body {
   border-bottom: 1px solid var(--border);
   transition: all 0.2s ease;
 }
+
 .hover-link:hover {
   color: var(--accent);
   border-bottom-color: var(--accent);
@@ -79,4 +83,276 @@ body {
   grid-template-rows: repeat(7, 1fr);
   grid-auto-flow: column;
   gap: 3px;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  margin-bottom: 40px;
+}
+
+/* Filter tag */
+.filter-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border-radius: 2px;
+  background: transparent;
+}
+.filter-tag:hover, .filter-tag.active {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+  background: rgba(0,0,0,0.05);
+}
+.dark .filter-tag:hover, .dark .filter-tag.active {
+  background: rgba(255,255,255,0.05);
+}
+
+/* Search input */
+.search-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  width: 100%;
+  padding: 8px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.search-input:focus {
+  border-color: var(--text-primary);
+}
+.search-input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Post card */
+.post-card {
+  border-bottom: 1px solid var(--border);
+  padding: 24px 0;
+  transition: all 0.2s ease;
+}
+.post-card:last-child {
+  border-bottom: none;
+}
+.post-card:hover h3 {
+  color: var(--accent);
+}
+
+/* Experience card */
+.exp-card {
+  border-left: 2px solid var(--border);
+  padding-left: 1.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.exp-card:hover {
+  border-left-color: var(--accent);
+}
+.exp-card::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background 0.3s ease;
+}
+.exp-card:hover::before {
+  background: var(--accent);
+}
+
+/* Skill bar */
+.skill-bar-bg {
+  height: 4px;
+  background: var(--border);
+  width: 100%;
+  position: relative;
+  border-radius: 2px;
+}
+.skill-bar-fill {
+  height: 100%;
+  background: var(--text-primary);
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 2px;
+  transition: width 1s ease-in-out;
+}
+
+/* Timeline item */
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -21px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  background: var(--bg);
+  border: 2px solid var(--gutter-color);
+  border-radius: 50%;
+}
+
+/* Skill tag */
+.skill-tag {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 2px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* Details marker */
+details summary::-webkit-details-marker {
+  display: none;
+}
+summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+/* Metric card */
+.metric-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  border-radius: 2px;
+}
+
+/* Code block (dark) */
+.code-block {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 1.5rem;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  border: 1px solid #333;
+}
+
+/* Architecture box */
+.arch-box {
+  border: 1.5px solid var(--text-secondary);
+  padding: 1rem;
+  background: var(--surface);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  text-align: center;
+  min-width: 120px;
+}
+
+/* Architecture line */
+.arch-line {
+  height: 2px;
+  background: var(--border);
+  flex-grow: 1;
+  position: relative;
+}
+.arch-line::after {
+  content: '\2192';
+  position: absolute;
+  right: -5px;
+  top: -9px;
+  color: var(--text-secondary);
+}
+
+/* TOC item */
+.toc-item {
+  display: block;
+  padding: 4px 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+  text-decoration: none;
+}
+.toc-item:hover {
+  color: var(--accent);
+}
+
+/* Sticky sidebar */
+.sticky-sidebar {
+  position: sticky;
+  top: 4rem;
+}
+
+/* Article content */
+.article-content p {
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+}
+.article-content h2 {
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+/* Project card (catalogue) */
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.project-card:hover {
+  border-color: var(--text-secondary);
+}
+
+/* Project preview */
+.project-preview {
+  background: var(--border);
+  border-bottom: 1px solid var(--border);
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* GitHub stat */
+.github-stat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Tag button (projects filter) */
+.tag-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+  background: transparent;
+  cursor: pointer;
+}
+.tag-btn:hover, .tag-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(79, 70, 229, 0.05);
+}
+.dark .tag-btn:hover, .dark .tag-btn.active {
+  background: rgba(129, 140, 248, 0.1);
 }

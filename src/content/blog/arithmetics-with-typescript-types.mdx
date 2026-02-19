@@ -4,6 +4,40 @@ description: "pushing the type system to its absolute limits for no reason."
 date: 2024-05-13
 tags: ["typescript", "types"]
 draft: false
+readingTime: "12 min read"
 ---
 
-pushing the type system to its absolute limits for no reason.
+TypeScript's type system is Turing-complete. This isn't just a theoretical curiosity; it means we can actually perform complex computations, including arithmetic operations, entirely within the type system before a single line of JavaScript is even executed.
+
+## the challenge
+
+The fundamental problem is that TypeScript doesn't allow direct addition on numeric literal types. `type Three = 1 + 2` is a syntax error. To circumvent this, we have to use the length of tuple types as our "numbers".
+
+```typescript
+// Representing numbers as tuples
+type Length<T extends any[]> = T['length'];
+type Two = [unknown, unknown];
+type Check = Length<Two>; // Resolves to 2
+```
+
+## implementing addition
+
+To add two numbers, we create two tuples of the respective lengths and spread them into a new tuple. The length of that resulting tuple is our sum.
+
+```typescript
+type BuildTuple<L extends number, T extends any[] = []> =
+  T['length'] extends L
+    ? T
+    : BuildTuple<L, [unknown, ...T]>;
+
+type Add<A extends number, B extends number> =
+  Length<[...BuildTuple<A>, ...BuildTuple<B>]>;
+
+type Five = Add<2, 3>; // 5
+```
+
+This technique, while elegant, has recursion limits. By default, TypeScript allows a recursion depth of around 50-100. For larger numbers, we need to implement "tail-call optimization" patterns in our types or move to a base-10 string-based arithmetic system.
+
+## why do this?
+
+Beyond being a fun exercise for a Sunday afternoon, understanding these patterns makes you a better developer. It forces you to think about data structures in a completely different paradigm—declarative, recursive, and immutable.

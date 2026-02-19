@@ -1,0 +1,269 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GutterColumn from '../components/GutterColumn.astro';
+---
+
+<BaseLayout title="resume — utpal.dev" description="utpal's resume — full-stack developer, ai/ml, devops, distributed systems">
+  <GutterColumn />
+  <main class="max-w-3xl mx-auto px-6 md:px-0 md:pl-16 pt-16 md:pt-24 space-y-24">
+
+    <!-- Header -->
+    <section class="fade-in">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <h1 class="text-4xl font-medium tracking-tight mb-2" style="color: var(--text-primary);">curriculum vitae</h1>
+          <p class="font-mono text-sm" style="color: var(--text-secondary);">utpal@dev:~/resume.pdf</p>
+        </div>
+        <div>
+          <a href="#" class="inline-flex items-center gap-2 px-4 py-2 border rounded-sm font-mono text-xs transition-all shadow-sm" style="background-color: var(--surface); border-color: var(--border); color: var(--text-primary);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            download pdf
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work History -->
+    <section class="fade-in" style="animation-delay: 0.1s;">
+      <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-secondary);">// work_history</span>
+      <div class="space-y-12">
+
+        <div class="exp-card">
+          <details open class="group">
+            <summary class="flex justify-between items-baseline">
+              <div>
+                <h3 class="font-bold text-lg" style="color: var(--text-primary);">Senior Fullstack Engineer</h3>
+                <p class="font-medium" style="color: var(--text-secondary);">Stellar Systems</p>
+              </div>
+              <div class="text-right">
+                <span class="font-mono text-xs" style="color: var(--text-secondary);">2022 — Present</span>
+                <span class="block text-[10px] font-bold group-open:hidden" style="color: var(--accent);">[click to expand details]</span>
+              </div>
+            </summary>
+            <div class="mt-4 space-y-4 text-sm leading-relaxed" style="color: var(--text-secondary);">
+              <p>Architecting distributed microservices handling 50k+ requests per second. Reduced latency by 40% through custom caching layers and database optimization.</p>
+              <ul class="list-none space-y-2">
+                <li class="flex gap-3"><span class="font-mono" style="color: var(--text-secondary);">01</span> built real-time analytics engine using rust and clickhouse.</li>
+                <li class="flex gap-3"><span class="font-mono" style="color: var(--text-secondary);">02</span> led transition from monolithic architecture to kubernetes-based microservices.</li>
+                <li class="flex gap-3"><span class="font-mono" style="color: var(--text-secondary);">03</span> mentored 4 junior developers and established ci/cd best practices.</li>
+              </ul>
+              <div class="flex gap-2 pt-2">
+                <span class="px-2 py-1 font-mono text-[10px]" style="background-color: var(--border); color: var(--text-secondary);">rust</span>
+                <span class="px-2 py-1 font-mono text-[10px]" style="background-color: var(--border); color: var(--text-secondary);">go</span>
+                <span class="px-2 py-1 font-mono text-[10px]" style="background-color: var(--border); color: var(--text-secondary);">k8s</span>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div class="exp-card">
+          <details class="group">
+            <summary class="flex justify-between items-baseline">
+              <div>
+                <h3 class="font-bold text-lg" style="color: var(--text-primary);">Software Developer</h3>
+                <p class="font-medium" style="color: var(--text-secondary);">CloudScale Labs</p>
+              </div>
+              <div class="text-right">
+                <span class="font-mono text-xs" style="color: var(--text-secondary);">2020 — 2022</span>
+                <span class="block text-[10px] font-bold group-open:hidden" style="color: var(--accent);">[click to expand details]</span>
+              </div>
+            </summary>
+            <div class="mt-4 space-y-4 text-sm leading-relaxed" style="color: var(--text-secondary);">
+              <p>Developed frontend components and backend APIs for a high-traffic SaaS platform. Focused on performance and accessibility across mobile and desktop.</p>
+              <ul class="list-none space-y-2">
+                <li class="flex gap-3"><span class="font-mono" style="color: var(--text-secondary);">01</span> improved page load speeds by 60% via code splitting and asset optimization.</li>
+                <li class="flex gap-3"><span class="font-mono" style="color: var(--text-secondary);">02</span> implemented end-to-end testing suite reducing production bugs by 30%.</li>
+              </ul>
+              <div class="flex gap-2 pt-2">
+                <span class="px-2 py-1 font-mono text-[10px]" style="background-color: var(--border); color: var(--text-secondary);">react</span>
+                <span class="px-2 py-1 font-mono text-[10px]" style="background-color: var(--border); color: var(--text-secondary);">typescript</span>
+                <span class="px-2 py-1 font-mono text-[10px]" style="background-color: var(--border); color: var(--text-secondary);">postgres</span>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div class="exp-card">
+          <details class="group">
+            <summary class="flex justify-between items-baseline">
+              <div>
+                <h3 class="font-bold text-lg" style="color: var(--text-primary);">Intern - Backend Systems</h3>
+                <p class="font-medium" style="color: var(--text-secondary);">ProtoCore</p>
+              </div>
+              <div class="text-right">
+                <span class="font-mono text-xs" style="color: var(--text-secondary);">2019 — 2020</span>
+                <span class="block text-[10px] font-bold group-open:hidden" style="color: var(--accent);">[click to expand details]</span>
+              </div>
+            </summary>
+            <div class="mt-4 space-y-4 text-sm leading-relaxed" style="color: var(--text-secondary);">
+              <p>Automated internal dev-ops tooling and managed database migrations for legacy applications.</p>
+              <div class="flex gap-2 pt-2">
+                <span class="px-2 py-1 font-mono text-[10px]" style="background-color: var(--border); color: var(--text-secondary);">python</span>
+                <span class="px-2 py-1 font-mono text-[10px]" style="background-color: var(--border); color: var(--text-secondary);">docker</span>
+              </div>
+            </div>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Skills Matrix -->
+    <section class="fade-in" style="animation-delay: 0.2s;">
+      <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-secondary);">// skills_matrix</span>
+      <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
+        <div class="space-y-6">
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-mono text-xs uppercase tracking-wider" style="color: var(--text-primary);">Backend / Infrastructure</span>
+              <span class="font-mono text-xs" style="color: var(--text-secondary);">95%</span>
+            </div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 95%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-mono text-xs uppercase tracking-wider" style="color: var(--text-primary);">Distributed Systems</span>
+              <span class="font-mono text-xs" style="color: var(--text-secondary);">90%</span>
+            </div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%"></div></div>
+          </div>
+        </div>
+        <div class="space-y-6">
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-mono text-xs uppercase tracking-wider" style="color: var(--text-primary);">Frontend Architecture</span>
+              <span class="font-mono text-xs" style="color: var(--text-secondary);">85%</span>
+            </div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-mono text-xs uppercase tracking-wider" style="color: var(--text-primary);">ML/LLM Engineering</span>
+              <span class="font-mono text-xs" style="color: var(--text-secondary);">75%</span>
+            </div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 75%"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stack Breakdown + Certifications -->
+    <section class="fade-in grid md:grid-cols-2 gap-12" style="animation-delay: 0.25s;">
+      <div>
+        <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-secondary);">// stack breakdown</span>
+        <div class="space-y-6">
+          <div>
+            <span class="font-mono text-[10px] uppercase tracking-wider mb-2 block" style="color: var(--text-secondary);">Languages</span>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">Go</span>
+              <span class="skill-tag">Rust</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">C++</span>
+            </div>
+          </div>
+          <div>
+            <span class="font-mono text-[10px] uppercase tracking-wider mb-2 block" style="color: var(--text-secondary);">Infrastructure</span>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Terraform</span>
+              <span class="skill-tag">Nginx</span>
+              <span class="skill-tag">PostgreSQL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-secondary);">// certifications</span>
+        <div class="space-y-4">
+          <div class="group border-b pb-3" style="border-color: var(--border);">
+            <div class="flex justify-between items-start">
+              <div>
+                <h4 class="text-sm font-medium" style="color: var(--text-primary);">AWS Certified Developer</h4>
+                <p class="text-[11px] font-mono" style="color: var(--text-secondary);">Amazon Web Services &middot; 2023</p>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:text-accent transition-colors" style="color: var(--border);"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+            </div>
+          </div>
+          <div class="group border-b pb-3" style="border-color: var(--border);">
+            <div class="flex justify-between items-start">
+              <div>
+                <h4 class="text-sm font-medium" style="color: var(--text-primary);">CKAD: Kubernetes Application Developer</h4>
+                <p class="text-[11px] font-mono" style="color: var(--text-secondary);">Cloud Native Computing Foundation &middot; 2023</p>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:text-accent transition-colors" style="color: var(--border);"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Professional Milestones -->
+    <section class="fade-in" style="animation-delay: 0.3s;">
+      <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-secondary);">// professional_milestones</span>
+      <div class="relative pt-8 pb-12">
+        <div class="absolute left-0 top-0 bottom-0 w-px" style="background-color: var(--border);"></div>
+        <div class="space-y-12 ml-6">
+          <div class="relative">
+            <div class="absolute -left-[29px] top-1 w-2 h-2 rounded-full" style="background-color: var(--accent);"></div>
+            <span class="font-mono text-[10px] font-bold block mb-1" style="color: var(--accent);">MAY 2024</span>
+            <h4 class="font-medium" style="color: var(--text-primary);">Open Source Breakthrough</h4>
+            <p class="text-sm mt-1" style="color: var(--text-secondary);">Reached 5k stars on 'rust-search-engine' repository.</p>
+          </div>
+          <div class="relative">
+            <div class="absolute -left-[29px] top-1 w-2 h-2 rounded-full" style="background-color: var(--border);"></div>
+            <span class="font-mono text-[10px] font-bold block mb-1" style="color: var(--text-secondary);">DEC 2023</span>
+            <h4 class="font-medium" style="color: var(--text-primary);">Conference Speaker</h4>
+            <p class="text-sm mt-1" style="color: var(--text-secondary);">Presented "Scaling Rust Microservices" at RustConf Asia.</p>
+          </div>
+          <div class="relative">
+            <div class="absolute -left-[29px] top-1 w-2 h-2 rounded-full" style="background-color: var(--border);"></div>
+            <span class="font-mono text-[10px] font-bold block mb-1" style="color: var(--text-secondary);">AUG 2021</span>
+            <h4 class="font-medium" style="color: var(--text-primary);">First Tech Lead Role</h4>
+            <p class="text-sm mt-1" style="color: var(--text-secondary);">Appointed lead for the Core Platform team at CloudScale.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education & Extra -->
+    <section class="fade-in pb-20" style="animation-delay: 0.35s;">
+      <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-secondary);">// education & extra</span>
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <h3 class="font-medium mb-1" style="color: var(--text-primary);">B.S. Computer Science</h3>
+          <p class="text-sm" style="color: var(--text-secondary);">University of Technology &middot; 2020 — 2024</p>
+          <p class="text-xs mt-2 font-mono" style="color: var(--text-secondary);">GPA: 3.9 / 4.0 &middot; Dean's List</p>
+        </div>
+        <div>
+          <ul class="space-y-2 text-sm font-light" style="color: var(--text-secondary);">
+            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full" style="background-color: var(--text-secondary);"></span> Fluent in English, Hindi</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full" style="background-color: var(--text-secondary);"></span> Open source contributor (50+ PRs)</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full" style="background-color: var(--text-secondary);"></span> Hackathon winner (Global AI Hack 2023)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script is:inline>
+    // Animate skill bars on scroll
+    const skillBars = document.querySelectorAll('.skill-bar-fill');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const targetWidth = entry.target.style.width;
+          entry.target.style.width = '0%';
+          setTimeout(() => {
+            entry.target.style.width = targetWidth;
+          }, 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    skillBars.forEach(bar => observer.observe(bar));
+  </script>
+</BaseLayout>
