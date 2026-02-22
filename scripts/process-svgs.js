@@ -16,24 +16,12 @@ const FILES = [
 // Group IDs to strip entirely (matched as substring of the id attribute)
 const GROUPS_TO_STRIP = ["background-simple", "background-complete", "Shadow"];
 
-// Color remappings (case-insensitive matching)
+// Color remappings — minimal: only remap accent colors.
+// Skin tones, whites, grays, and strokes stay as-is.
+// Dark mode handled via CSS filter on the component wrapper.
 const COLOR_MAP = [
-  // Accent colors
   { from: "#92E3A9", to: "var(--accent)" },
   { from: "#407BFF", to: "var(--accent)" },
-  { from: "#de5753", to: "var(--accent)" },
-  { from: "#e4897b", to: "var(--accent)" },
-  // Dark strokes -> text-primary
-  { from: "#263238", to: "var(--text-primary)" },
-  // Light fills -> bg
-  { from: "#f5f5f5", to: "var(--bg)" },
-  { from: "#f0f0f0", to: "var(--bg)" },
-  { from: "#ebebeb", to: "var(--bg)" },
-  { from: "#e6e6e6", to: "var(--bg)" },
-  { from: "#e0e0e0", to: "var(--bg)" },
-  { from: "#e5e5e5", to: "var(--bg)" },
-  // White fills -> bg (must match complete hex, not partial)
-  { from: "#fff", to: "var(--bg)", exact: true },
 ];
 
 /**

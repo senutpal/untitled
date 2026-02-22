@@ -5,14 +5,18 @@ import readingSvg from '../assets/scenes/reading.svg?raw';
 
 const scenes = [codingSvg, gamingSvg, readingSvg];
 
+const HOLD_MS = 4000;
+const FADE_MS = 1000;
+const CYCLE_MS = HOLD_MS + FADE_MS;
+
 export default function SceneCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const id = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % scenes.length);
-    }, 5000);
-    return () => clearInterval(interval);
+    }, CYCLE_MS);
+    return () => clearInterval(id);
   }, []);
 
   return (
@@ -24,17 +28,20 @@ export default function SceneCarousel() {
         aspectRatio: '1',
       }}
     >
-      <style>{`.scene-carousel svg { width: 100%; height: 100%; }`}</style>
-      {scenes.map((svg, index) => (
+      <style>{`
+        .scene-carousel svg { width: 100%; height: 100%; }
+        .dark .scene-carousel { filter: invert(0.88) hue-rotate(180deg); }
+      `}</style>
+      {scenes.map((svg, i) => (
         <div
-          key={index}
+          key={i}
           style={{
             position: 'absolute',
             inset: 0,
             pointerEvents: 'none',
-            opacity: index === activeIndex ? 1 : 0,
-            transform: index === activeIndex ? 'scale(1)' : 'scale(0.97)',
-            transition: 'opacity 1000ms ease-in-out, transform 1000ms ease-in-out',
+            opacity: i === activeIndex ? 1 : 0,
+            transform: i === activeIndex ? 'scale(1)' : 'scale(0.97)',
+            transition: `opacity ${FADE_MS}ms ease-in-out, transform ${FADE_MS}ms ease-in-out`,
           }}
           dangerouslySetInnerHTML={{ __html: svg }}
         />
