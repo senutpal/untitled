@@ -1,0 +1,104 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GutterColumn from '../../components/GutterColumn.astro';
+
+export async function getStaticPaths() {
+  const readings = await getCollection('reading');
+  return readings.map((reading) => ({
+    params: { slug: reading.slug },
+    props: { reading },
+  }));
+}
+
+const { reading } = Astro.props;
+const { Content } = await reading.render();
+
+const stars = reading.data.rating ? '★'.repeat(reading.data.rating) + '☆'.repeat(5 - reading.data.rating) : null;
+---
+
+<BaseLayout title={`${reading.data.title} — utpal.dev`} description={`Notes on ${reading.data.title} by ${reading.data.author}`}>
+  <GutterColumn />
+  <main class="max-w-3xl mx-auto px-6 md:px-0 md:pl-16 pt-16 md:pt-24 min-h-screen">
+
+    <nav class="breadcrumb fade-in">
+      <a href="/" class="hover:text-accent transition-colors" style="color: var(--text-secondary);">~/home</a>
+      <span class="mx-2" style="color: var(--border);">/</span>
+      <a href="/reading" class="hover:text-accent transition-colors" style="color: var(--text-secondary);">reading</a>
+      <span class="mx-2" style="color: var(--border);">/</span>
+      <span style="color: var(--text-primary);">{reading.slug}</span>
+    </nav>
+
+    <section class="fade-in mb-16">
+      <h1 class="text-4xl font-semibold tracking-tight leading-tight mt-4" style="color: var(--text-primary);">
+        {reading.data.title}
+      </h1>
+      <div class="flex flex-wrap gap-3 mt-4 items-center">
+        <span class="text-sm font-medium" style="color: var(--text-secondary);">{reading.data.author}</span>
+        {reading.data.tags.length > 0 && (
+          <>
+            <span style="color: var(--border);">•</span>
+            {reading.data.tags.map((tag) => (
+              <span class="pill">{tag}</span>
+            ))}
+          </>
+        )}
+        {stars && (
+          <>
+            <span style="color: var(--border);">•</span>
+            <span class="text-sm font-bold tracking-tighter" style="color: var(--accent);">{stars}</span>
+          </>
+        )}
+      </div>
+    </section>
+
+    {reading.data.abstract && (
+      <section class="fade-in fade-in-delay-1 mb-16">
+        <span class="font-mono text-[0.85rem] block mb-6 border-b pb-2" style="color: var(--text-secondary); border-color: var(--border);">the premise // abstract</span>
+        <div class="text-lg italic leading-relaxed" style="color: var(--text-secondary);">
+          <p>"{reading.data.abstract}"</p>
+        </div>
+      </section>
+    )}
+
+    {reading.data.takeaways && reading.data.takeaways.length > 0 && (
+      <section class="fade-in fade-in-delay-1 mb-16">
+        <span class="font-mono text-[0.85rem] block mb-6 border-b pb-2" style="color: var(--text-secondary); border-color: var(--border);">key takeaways // core concepts</span>
+        <div class="grid grid-cols-1 gap-8">
+          {reading.data.takeaways.map((t) => (
+            <div>
+              <h4 class="font-bold mb-2 flex items-center gap-2" style="color: var(--text-primary);">
+                {t.title}
+              </h4>
+              <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">
+                {t.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {reading.data.highlights && reading.data.highlights.length > 0 && (
+      <section class="fade-in fade-in-delay-2 mb-16">
+        <span class="font-mono text-[0.85rem] block mb-6 border-b pb-2" style="color: var(--text-secondary); border-color: var(--border);">significant highlights // bookmarks</span>
+        {reading.data.highlights.map((h) => (
+          <div class="highlight-card">
+            <p class="text-sm italic leading-relaxed" style="color: var(--text-primary);">
+              "{h.quote}"
+            </p>
+            <div class="mt-3 font-mono text-[10px]" style="color: var(--text-secondary);">{h.source}</div>
+          </div>
+        ))}
+      </section>
+    )}
+
+    <section class="fade-in fade-in-delay-2 pb-24">
+      <span class="font-mono text-[0.85rem] block mb-6 border-b pb-2" style="color: var(--text-secondary); border-color: var(--border);">final verdict // raw notes</span>
+      <div class="article-content text-sm" style="color: var(--text-secondary);">
+        <Content />
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>

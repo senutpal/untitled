@@ -356,3 +356,42 @@ summary {
 .dark .tag-btn:hover, .dark .tag-btn.active {
   background: rgba(129, 140, 248, 0.1);
 }
+
+/* Archive item (reading timeline) */
+.archive-item {
+  border-left: 1px solid var(--border);
+  padding-left: 2rem;
+  position: relative;
+}
+.archive-item::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  background: var(--border);
+  border-radius: 50%;
+}
+.archive-item:hover::before {
+  background: var(--accent);
+}
+
+/* Highlight card (reading detail) */
+.highlight-card {
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Pill tag */
+.pill {
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--border);
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-secondary);
+}

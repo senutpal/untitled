@@ -66,6 +66,19 @@ const reading = defineCollection({
     status: z.enum(['reading', 'on-deck', 'completed']),
     url: z.string(),
     duration: z.string().optional(),
+    date: z.string(),
+    tags: z.array(z.string()).default([]),
+    rating: z.number().min(1).max(5).optional(),
+    abstract: z.string().optional(),
+    takeaways: z.array(z.object({
+      icon: z.string(),
+      title: z.string(),
+      description: z.string(),
+    })).optional(),
+    highlights: z.array(z.object({
+      quote: z.string(),
+      source: z.string(),
+    })).optional(),
   }),
 });
 
