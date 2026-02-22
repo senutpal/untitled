@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import GutterColumn from '../../components/GutterColumn.astro';
+import GutterColumn from '../../components/ui/GutterColumn.astro';
 
 const allReading = await getCollection('reading');
 
@@ -41,7 +41,7 @@ const typeLabel: Record<string, string> = {
   <main class="max-w-3xl mx-auto px-6 md:px-0 md:pl-16 pt-16 md:pt-24 min-h-screen">
 
     <nav class="breadcrumb fade-in">
-      <a href="/" class="hover:text-accent transition-colors" style="color: var(--text-secondary);">~/home</a>
+      <a href="/" class="hover:text-accent transition-colors" style="color: var(--text-tertiary);">~/home</a>
       <span class="mx-2" style="color: var(--border);">/</span>
       <span style="color: var(--text-primary);">reading</span>
     </nav>
@@ -63,18 +63,18 @@ const typeLabel: Record<string, string> = {
     <section class="fade-in space-y-16" style="animation-delay: 0.2s;" id="archive-list">
       {[...grouped.entries()].map(([year, items]) => (
         <div class="archive-group" data-year={year}>
-          <span class="font-mono text-[0.85rem] block mb-6" style="color: var(--text-secondary);">// {year}</span>
+          <span class="font-mono text-[0.85rem] block mb-6" style="color: var(--text-tertiary);">// {year}</span>
           <div class="space-y-10">
             {items.map((item) => (
               <a href={`/reading/${item.slug}`} class="archive-item block" data-type={item.data.type}>
-                <span class="font-mono text-[10px] absolute left-8 -top-5" style="color: var(--text-secondary);">{item.data.date}</span>
+                <span class="font-mono text-[10px] absolute left-8 -top-5" style="color: var(--text-tertiary);">{item.data.date}</span>
                 <div class="group cursor-pointer">
                   <h3 class="font-semibold group-hover:text-accent transition-colors" style="color: var(--text-primary);">{item.data.title}</h3>
-                  <p class="text-sm mt-1" style="color: var(--text-secondary);">
+                  <p class="text-sm mt-1" style="color: var(--text-tertiary);">
                     {item.data.author} · {typeLabel[item.data.type]}
                   </p>
                   {item.data.tags.length > 0 && (
-                    <p class="text-xs font-mono mt-2" style="color: var(--text-secondary);">
+                    <p class="text-xs font-mono mt-2" style="color: var(--text-tertiary);">
                       {item.data.tags.join(' · ')}
                     </p>
                   )}
@@ -87,7 +87,7 @@ const typeLabel: Record<string, string> = {
     </section>
 
     <div class="pt-12 pb-24 text-center fade-in" style="animation-delay: 0.3s;">
-      <p class="font-mono text-xs" style="color: var(--text-secondary);">-- end of archive --</p>
+      <p class="font-mono text-xs" style="color: var(--text-muted);">-- end of archive --</p>
     </div>
   </main>
 

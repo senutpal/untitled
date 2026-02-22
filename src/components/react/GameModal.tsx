@@ -21,22 +21,20 @@ export default function GameModal() {
 
   return (
     <>
-      <div className="flex flex-wrap justify-between gap-4">
+      <div className="flex flex-wrap gap-4">
         <button
           onClick={() => setIsOpen(true)}
-          className="border px-4 py-8 w-32 text-center rounded-sm transition-all group hover:bg-black hover:border-black"
-          style={{ borderColor: 'var(--border)' }}
+          className="game-card border px-4 py-8 w-32 text-center rounded-sm transition-all group"
         >
           <span className="block text-2xl mb-2 grayscale group-hover:grayscale-0 transition-all">👾</span>
-          <span className="font-mono text-xs transition-colors group-hover:text-white" style={{ color: 'var(--text-secondary)' }}>snake.exe</span>
+          <span className="font-mono text-xs" style={{ color: 'var(--text-secondary)' }}>snake.exe</span>
         </button>
         <button
           onClick={() => setIsOpen(true)}
-          className="border px-4 py-8 w-32 text-center rounded-sm transition-all group hover:bg-black hover:border-black"
-          style={{ borderColor: 'var(--border)' }}
+          className="game-card border px-4 py-8 w-32 text-center rounded-sm transition-all group"
         >
           <span className="block text-2xl mb-2 grayscale group-hover:grayscale-0 transition-all">🧱</span>
-          <span className="font-mono text-xs transition-colors group-hover:text-white" style={{ color: 'var(--text-secondary)' }}>tetris.exe</span>
+          <span className="font-mono text-xs" style={{ color: 'var(--text-secondary)' }}>tetris.exe</span>
         </button>
       </div>
 
@@ -48,13 +46,13 @@ export default function GameModal() {
           aria-modal="true"
           aria-label="Game loader"
         >
-          <div className="bg-[#1a1a1a] p-1 border border-gray-700 shadow-2xl">
+          <div className="bg-[#1a1a1a] p-1 border border-neutral-700 shadow-2xl">
             <div className="bg-black p-8 w-[300px] h-[400px] flex flex-col items-center justify-center text-center">
               <h2 className="font-mono text-green-500 text-xl mb-4">GAME_LOADER</h2>
-              <div className="w-full bg-gray-900 h-1 mb-4 rounded-full overflow-hidden">
+              <div className="w-full bg-neutral-900 h-1 mb-4 rounded-full overflow-hidden">
                 <div className="h-full bg-green-500" style={{ width: '50%' }}></div>
               </div>
-              <p className="font-mono text-gray-500 text-xs">Press ESC to exit process</p>
+              <p className="font-mono text-neutral-500 text-xs">Press ESC to exit process</p>
             </div>
           </div>
         </div>

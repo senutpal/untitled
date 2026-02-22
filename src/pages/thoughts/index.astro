@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import GutterColumn from '../../components/GutterColumn.astro';
+import GutterColumn from '../../components/ui/GutterColumn.astro';
 
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -22,7 +22,7 @@ function formatDate(date: Date) {
   <main class="max-w-3xl mx-auto px-6 md:px-0 md:pl-16 pt-16 md:pt-24 min-h-screen">
 
     <nav class="breadcrumb fade-in">
-      <a href="/" class="hover:text-accent transition-colors" style="color: var(--text-secondary);">~/home</a>
+      <a href="/" class="hover:text-accent transition-colors" style="color: var(--text-tertiary);">~/home</a>
       <span class="mx-2" style="color: var(--border);">/</span>
       <span style="color: var(--text-primary);">thoughts</span>
     </nav>
@@ -35,22 +35,22 @@ function formatDate(date: Date) {
         </div>
         <div class="w-full md:w-64">
           <div class="relative">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute right-0 top-2 w-4 h-4" style="color: var(--text-secondary);"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute right-0 top-2 w-4 h-4" style="color: var(--text-tertiary);"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
             <input type="text" placeholder="grep thoughts..." class="search-input" id="search-input" />
           </div>
         </div>
       </div>
 
       <div class="flex flex-wrap items-center gap-3 mb-10 pb-6 border-b" style="border-color: var(--border);">
-        <span class="text-xs font-mono mr-2" style="color: var(--text-secondary);">filters:</span>
+        <span class="text-xs font-mono mr-2" style="color: var(--text-tertiary);">filters:</span>
         <button class="filter-tag active" data-tag="all">all</button>
         {allTags.map((tag) => (
           <button class="filter-tag" data-tag={tag}>{tag}</button>
         ))}
 
         <div class="ml-auto flex items-center gap-2">
-          <span class="text-xs font-mono" style="color: var(--text-secondary);">sort:</span>
-          <select id="sort-select" class="font-mono text-[11px] bg-transparent border-none outline-none cursor-pointer" style="color: var(--text-secondary);">
+          <span class="text-xs font-mono" style="color: var(--text-tertiary);">sort:</span>
+          <select id="sort-select" class="font-mono text-[11px] bg-transparent border-none outline-none cursor-pointer" style="color: var(--text-tertiary);">
             <option value="newest">newest_first</option>
             <option value="oldest">oldest_first</option>
           </select>
@@ -59,19 +59,19 @@ function formatDate(date: Date) {
     </section>
 
     <section class="fade-in space-y-2" style="animation-delay: 0.2s;">
-      <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-secondary);">// results</span>
+      <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-tertiary);">// results</span>
 
       <div id="posts-list">
         {posts.map((post) => (
           <a href={`/thoughts/${post.slug}`} class="post-card group cursor-pointer block" data-tags={post.data.tags.join(',')} data-date={post.data.date.toISOString()} data-title={post.data.title.toLowerCase()}>
             <div class="flex justify-between items-baseline mb-2">
               <h3 class="text-xl font-semibold transition-colors" style="color: var(--text-primary);">{post.data.title}</h3>
-              <span class="font-mono text-xs" style="color: var(--text-secondary);">{formatDate(post.data.date)}</span>
+              <span class="font-mono text-xs" style="color: var(--text-tertiary);">{formatDate(post.data.date)}</span>
             </div>
             <p class="text-sm leading-relaxed mb-4 max-w-2xl" style="color: var(--text-secondary);">
               {post.data.description}
             </p>
-            <div class="flex items-center gap-6 font-mono text-[10px] uppercase tracking-widest" style="color: var(--text-secondary);">
+            <div class="flex items-center gap-6 font-mono text-[10px] uppercase tracking-widest" style="color: var(--text-tertiary);">
               {post.data.readingTime && (
                 <span class="flex items-center gap-1.5">
                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -90,7 +90,7 @@ function formatDate(date: Date) {
       </div>
 
       <div class="pt-12 text-center">
-        <p class="font-mono text-xs" style="color: var(--text-secondary);">-- end of directory --</p>
+        <p class="font-mono text-xs" style="color: var(--text-muted);">-- end of directory --</p>
       </div>
     </section>
   </main>

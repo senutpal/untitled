@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import GutterColumn from '../../components/GutterColumn.astro';
+import GutterColumn from '../../components/ui/GutterColumn.astro';
 
 const projects = (await getCollection('projects'))
   .sort((a, b) => a.data.order - b.data.order);
@@ -14,7 +14,7 @@ const allTags = [...new Set(projects.flatMap((p) => p.data.tech))];
   <main class="max-w-5xl mx-auto px-6 md:px-0 md:pl-16 pt-16 md:pt-24">
 
     <header class="mb-16 fade-in">
-      <a href="/" class="font-mono text-xs transition-colors mb-8 inline-block hover:text-accent" style="color: var(--text-secondary);">&larr; cd ..</a>
+      <a href="/" class="font-mono text-xs transition-colors mb-8 inline-block hover:text-accent" style="color: var(--text-tertiary);">&larr; cd ..</a>
       <h1 class="text-4xl font-medium tracking-tight mb-4" style="color: var(--text-primary);">projects.exe</h1>
       <p class="max-w-2xl font-light" style="color: var(--text-secondary);">
         a collection of systems, experiments, and open-source contributions. filtered by technical stack.
@@ -41,7 +41,7 @@ const allTags = [...new Set(projects.flatMap((p) => p.data.tech))];
               </div>
             )}
             {project.data.previewType === 'browser' && (
-              <div class="w-full h-full bg-gray-100 dark:bg-gray-800 p-8 flex items-center justify-center">
+              <div class="w-full h-full bg-gray-100 dark:bg-neutral-800 p-8 flex items-center justify-center">
                 <div class="w-full max-w-xs border rounded shadow-lg overflow-hidden flex flex-col" style="background-color: var(--surface); border-color: var(--border);">
                   <div class="h-6 border-b flex items-center px-2 gap-1" style="border-color: var(--border);">
                     <div class="w-2 h-2 rounded-full bg-red-400"></div>
@@ -49,9 +49,10 @@ const allTags = [...new Set(projects.flatMap((p) => p.data.tech))];
                     <div class="w-2 h-2 rounded-full bg-green-400"></div>
                   </div>
                   <div class="p-4">
-                    <div class="h-24 w-full border border-dashed flex items-center justify-center font-mono text-[10px]" style="border-color: var(--border); color: var(--text-secondary);">
+                    <div class="h-24 w-full border border-dashed flex items-center justify-center font-mono text-[10px]" style="border-color: var(--border); color: var(--text-muted);">
                       [Canvas Rendering Context 2D]
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -64,27 +65,27 @@ const allTags = [...new Set(projects.flatMap((p) => p.data.tech))];
                     <div class="w-8 h-8 rounded bg-blue-500/50"></div>
                     <div class="w-8 h-8 rounded bg-blue-500/20"></div>
                   </div>
-                  <span class="font-mono text-xs text-gray-400">scaling cluster: us-east-1</span>
+                  <span class="font-mono text-xs text-neutral-400">scaling cluster: us-east-1</span>
                 </div>
               </div>
             )}
             {project.data.previewType === 'grid' && (
               <div class="w-full h-full flex items-center justify-center" style="background-color: var(--surface);">
                 <div class="grid grid-cols-4 gap-2 w-48">
-                  <div class="h-12 bg-gray-100 dark:bg-gray-700 rounded-[1px]"></div>
+                  <div class="h-12 bg-gray-100 dark:bg-neutral-700 rounded-[1px]"></div>
                   <div class="h-12 bg-green-200 dark:bg-green-800 rounded-[1px]"></div>
                   <div class="h-12 bg-green-400 dark:bg-green-600 rounded-[1px]"></div>
-                  <div class="h-12 bg-gray-100 dark:bg-gray-700 rounded-[1px]"></div>
+                  <div class="h-12 bg-gray-100 dark:bg-neutral-700 rounded-[1px]"></div>
                   <div class="h-12 bg-green-600 dark:bg-green-500 rounded-[1px]"></div>
                   <div class="h-12 bg-green-200 dark:bg-green-800 rounded-[1px]"></div>
-                  <div class="h-12 bg-gray-100 dark:bg-gray-700 rounded-[1px]"></div>
+                  <div class="h-12 bg-gray-100 dark:bg-neutral-700 rounded-[1px]"></div>
                   <div class="h-12 bg-green-800 dark:bg-green-400 rounded-[1px]"></div>
                 </div>
               </div>
             )}
             {!project.data.previewType && (
               <div class="w-full h-full flex items-center justify-center" style="background-color: var(--surface);">
-                <span class="font-mono text-xs" style="color: var(--text-secondary);">{project.data.name}</span>
+                <span class="font-mono text-xs" style="color: var(--text-tertiary);">{project.data.name}</span>
               </div>
             )}
           </div>
@@ -120,9 +121,9 @@ const allTags = [...new Set(projects.flatMap((p) => p.data.tech))];
     </section>
 
     <section class="mt-24 pb-20 fade-in" style="animation-delay: 0.3s;">
-      <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-secondary);">// more on github</span>
+      <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-tertiary);">// more on github</span>
       <div class="border border-dashed p-8 rounded-sm text-center" style="border-color: var(--border);">
-        <p class="text-sm mb-4" style="color: var(--text-secondary);">discover 40+ more repositories and forks</p>
+        <p class="text-sm mb-4" style="color: var(--text-tertiary);">discover 40+ more repositories and forks</p>
         <a href="https://github.com/utpal" class="hover-link font-mono text-xs">view profile &rarr;</a>
       </div>
     </section>

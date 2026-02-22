@@ -18,12 +18,12 @@ const { name, description, tech, github, demo, slug } = Astro.props;
       <h3 class="font-bold lowercase" style="color: var(--text-primary);">{name}</h3>
     )}
     <div class="flex gap-3">
-      <a href={github} class="font-mono text-xs transition-colors" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'" aria-label={`${name} on GitHub`}>github →</a>
+      <a href={github} class="font-mono text-xs transition-colors" style="color: var(--text-tertiary);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-tertiary)'" aria-label={`${name} on GitHub`}>github →</a>
       {demo && (
-        <a href={demo} class="font-mono text-xs transition-colors" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'" aria-label={`${name} live demo`}>live demo →</a>
+        <a href={demo} class="font-mono text-xs transition-colors" style="color: var(--text-tertiary);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-tertiary)'" aria-label={`${name} live demo`}>live demo →</a>
       )}
     </div>
   </div>
   <p class="text-sm mb-3 leading-relaxed" style="color: var(--text-secondary);">{description}</p>
-  <p class="font-mono text-xs" style="color: var(--gutter-color);">{tech.join(' · ')}</p>
+  <p class="font-mono text-xs" style="color: var(--text-muted);">{tech.join(' · ')}</p>
 </div>

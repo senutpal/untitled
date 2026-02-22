@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import SectionHeader from './SectionHeader.astro';
-import BlogPostEntry from './BlogPostEntry.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import BlogPostEntry from '../ui/BlogPostEntry.astro';
 
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)

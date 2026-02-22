@@ -1,0 +1,26 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import { GitHubContributions } from '../react/GitHubContributions';
+import { fetchGitHubContributions } from '../../lib/github';
+
+const raw = await fetchGitHubContributions('senutpal');
+
+const activities = raw.weeks.flatMap((week) =>
+  week.contributionDays
+    .filter((day) => day.date)
+    .map((day) => ({
+      date: day.date,
+      count: day.contributionCount,
+      level: Math.min(4, day.contributionCount === 0 ? 0 : Math.ceil(day.contributionCount / 3)) as 0 | 1 | 2 | 3 | 4,
+    }))
+);
+---
+
+<section class="fade-on-scroll">
+  <SectionHeader title="contributions" />
+  <GitHubContributions
+    client:visible
+    data={activities}
+    totalContributions={raw.totalContributions}
+  />
+</section>

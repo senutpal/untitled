@@ -10,7 +10,7 @@ const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: '2
 ---
 
 <article class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8 group cursor-pointer">
-  <span class="font-mono text-xs w-24 shrink-0" style="color: var(--gutter-color);">{formattedDate}</span>
+  <span class="font-mono text-xs w-24 shrink-0" style="color: var(--text-muted);">{formattedDate}</span>
   <a href={`/blog/${slug}`} class="grow no-underline">
     <h3 class="font-semibold transition-colors underline decoration-transparent group-hover:decoration-current underline-offset-4 group-hover:text-accent-blue">{title}</h3>
     <p class="text-sm mt-1" style="color: var(--text-secondary);">{description}</p>

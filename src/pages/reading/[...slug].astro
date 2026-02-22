@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import GutterColumn from '../../components/GutterColumn.astro';
+import GutterColumn from '../../components/ui/GutterColumn.astro';
 
 export async function getStaticPaths() {
   const readings = await getCollection('reading');
@@ -22,9 +22,9 @@ const stars = reading.data.rating ? '★'.repeat(reading.data.rating) + '☆'.re
   <main class="max-w-3xl mx-auto px-6 md:px-0 md:pl-16 pt-16 md:pt-24 min-h-screen">
 
     <nav class="breadcrumb fade-in">
-      <a href="/" class="hover:text-accent transition-colors" style="color: var(--text-secondary);">~/home</a>
+      <a href="/" class="hover:text-accent transition-colors" style="color: var(--text-tertiary);">~/home</a>
       <span class="mx-2" style="color: var(--border);">/</span>
-      <a href="/reading" class="hover:text-accent transition-colors" style="color: var(--text-secondary);">reading</a>
+      <a href="/reading" class="hover:text-accent transition-colors" style="color: var(--text-tertiary);">reading</a>
       <span class="mx-2" style="color: var(--border);">/</span>
       <span style="color: var(--text-primary);">{reading.slug}</span>
     </nav>
@@ -34,7 +34,7 @@ const stars = reading.data.rating ? '★'.repeat(reading.data.rating) + '☆'.re
         {reading.data.title}
       </h1>
       <div class="flex flex-wrap gap-3 mt-4 items-center">
-        <span class="text-sm font-medium" style="color: var(--text-secondary);">{reading.data.author}</span>
+        <span class="text-sm font-medium" style="color: var(--text-tertiary);">{reading.data.author}</span>
         {reading.data.tags.length > 0 && (
           <>
             <span style="color: var(--border);">•</span>
@@ -54,7 +54,7 @@ const stars = reading.data.rating ? '★'.repeat(reading.data.rating) + '☆'.re
 
     {reading.data.abstract && (
       <section class="fade-in fade-in-delay-1 mb-16">
-        <span class="font-mono text-[0.85rem] block mb-6 border-b pb-2" style="color: var(--text-secondary); border-color: var(--border);">the premise // abstract</span>
+        <span class="font-mono text-[0.85rem] block mb-6 border-b pb-2" style="color: var(--text-tertiary); border-color: var(--border);">the premise // abstract</span>
         <div class="text-lg italic leading-relaxed" style="color: var(--text-secondary);">
           <p>"{reading.data.abstract}"</p>
         </div>
@@ -63,7 +63,7 @@ const stars = reading.data.rating ? '★'.repeat(reading.data.rating) + '☆'.re
 
     {reading.data.takeaways && reading.data.takeaways.length > 0 && (
       <section class="fade-in fade-in-delay-1 mb-16">
-        <span class="font-mono text-[0.85rem] block mb-6 border-b pb-2" style="color: var(--text-secondary); border-color: var(--border);">key takeaways // core concepts</span>
+        <span class="font-mono text-[0.85rem] block mb-6 border-b pb-2" style="color: var(--text-tertiary); border-color: var(--border);">key takeaways // core concepts</span>
         <div class="grid grid-cols-1 gap-8">
           {reading.data.takeaways.map((t) => (
             <div>
@@ -81,13 +81,13 @@ const stars = reading.data.rating ? '★'.repeat(reading.data.rating) + '☆'.re
 
     {reading.data.highlights && reading.data.highlights.length > 0 && (
       <section class="fade-in fade-in-delay-2 mb-16">
-        <span class="font-mono text-[0.85rem] block mb-6 border-b pb-2" style="color: var(--text-secondary); border-color: var(--border);">significant highlights // bookmarks</span>
+        <span class="font-mono text-[0.85rem] block mb-6 border-b pb-2" style="color: var(--text-tertiary); border-color: var(--border);">significant highlights // bookmarks</span>
         {reading.data.highlights.map((h) => (
           <div class="highlight-card">
             <p class="text-sm italic leading-relaxed" style="color: var(--text-primary);">
               "{h.quote}"
             </p>
-            <div class="mt-3 font-mono text-[10px]" style="color: var(--text-secondary);">{h.source}</div>
+            <div class="mt-3 font-mono text-[10px]" style="color: var(--text-tertiary);">{h.source}</div>
           </div>
         ))}
       </section>

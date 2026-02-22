@@ -1,6 +1,6 @@
 ---
-import AgeCounter from './AgeCounter.tsx';
-import SceneCarousel from './SceneCarousel.tsx';
+import AgeCounter from '../react/AgeCounter.tsx';
+import MagnetLines from '../react/MagnetLines.tsx';
 
 const birthTimestamp = new Date('2005-05-16').getTime();
 ---
@@ -56,7 +56,17 @@ const birthTimestamp = new Date('2005-05-16').getTime();
 
     <div class="hidden md:block">
       <div class="aspect-square rounded-sm overflow-hidden flex items-center justify-center">
-        <SceneCarousel client:visible />
+        <MagnetLines
+          client:visible
+          rows={12}
+          columns={12}
+          containerSize="100%"
+          lineColor="var(--text-muted)"
+          lineWidth="1.5px"
+          lineHeight="24px"
+          baseAngle={-10}
+          style={{ height: '100%' }}
+        />
       </div>
     </div>
   </div>

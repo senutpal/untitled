@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import GutterColumn from '../../components/GutterColumn.astro';
+import GutterColumn from '../../components/ui/GutterColumn.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -21,8 +21,8 @@ const { Content } = await project.render();
 
     <!-- Breadcrumb -->
     <nav class="breadcrumb fade-in">
-      <a href="/projects" class="hover:text-accent transition-colors" style="color: var(--text-secondary);">projects</a>
-      <span style="color: var(--text-secondary);"> / </span>
+      <a href="/projects" class="hover:text-accent transition-colors" style="color: var(--text-tertiary);">projects</a>
+      <span style="color: var(--text-tertiary);"> / </span>
       <span style="color: var(--text-primary);">{project.data.name}</span>
     </nav>
 
@@ -33,7 +33,7 @@ const { Content } = await project.render();
           <h1 class="text-4xl font-medium tracking-tight lowercase" style="color: var(--text-primary);">
             {project.data.name}
           </h1>
-          <div class="mt-4 flex flex-wrap gap-4 font-mono text-xs" style="color: var(--text-secondary);">
+          <div class="mt-4 flex flex-wrap gap-4 font-mono text-xs" style="color: var(--text-tertiary);">
             {project.data.tech.map((t) => (
               <span class="px-2 py-1 rounded" style="background-color: var(--border);">{t}</span>
             ))}
@@ -58,13 +58,13 @@ const { Content } = await project.render();
     <!-- Performance Metrics -->
     {project.data.metrics && (
       <section class="fade-in" style="animation-delay: 0.1s;">
-        <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-secondary);">// performance metrics</span>
+        <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-tertiary);">//performance metrics</span>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           {project.data.metrics.map((metric) => (
             <div class="metric-card">
-              <p class="text-xs font-mono uppercase mb-2" style="color: var(--text-secondary);">{metric.label}</p>
+              <p class="text-xs font-mono uppercase mb-2" style="color: var(--text-tertiary);">{metric.label}</p>
               <p class="text-3xl font-medium" style="color: var(--text-primary);">{metric.value}</p>
-              <p class="text-xs mt-2 font-mono" style="color: var(--text-secondary);">{metric.detail}</p>
+              <p class="text-xs mt-2 font-mono" style="color: var(--text-tertiary);">{metric.detail}</p>
             </div>
           ))}
         </div>
@@ -74,7 +74,7 @@ const { Content } = await project.render();
     <!-- Architecture -->
     {project.data.architecture && (
       <section class="fade-in" style="animation-delay: 0.15s;">
-        <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-secondary);">// architecture</span>
+        <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-tertiary);">//architecture</span>
         <div class="border p-8 rounded-sm" style="border-color: var(--border); background-color: var(--surface);">
           <div class="flex flex-col md:flex-row items-center justify-between gap-4 max-w-3xl mx-auto">
             {project.data.architecture.nodes.map((node, i) => (
@@ -112,9 +112,9 @@ const { Content } = await project.render();
     <!-- Code Snippet -->
     {project.data.codeSnippet && (
       <section class="fade-in" style="animation-delay: 0.2s;">
-        <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-secondary);">// code snippet</span>
+        <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-tertiary);">//code snippet</span>
         <div class="space-y-2">
-          <p class="text-sm font-mono" style="color: var(--text-secondary);">{project.data.codeSnippet.filename}</p>
+          <p class="text-sm font-mono" style="color: var(--text-tertiary);">{project.data.codeSnippet.filename}</p>
           <div class="code-block">
             <pre><code>{project.data.codeSnippet.code}</code></pre>
           </div>
@@ -125,11 +125,11 @@ const { Content } = await project.render();
     <!-- Benchmarks -->
     {project.data.benchmarks && (
       <section class="fade-in" style="animation-delay: 0.25s;">
-        <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-secondary);">// benchmarks</span>
+        <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-tertiary);">//benchmarks</span>
         <div class="border p-8 rounded-sm overflow-x-auto" style="background-color: var(--surface); border-color: var(--border);">
           <table class="w-full font-mono text-sm">
             <thead>
-              <tr class="border-b" style="border-color: var(--border); color: var(--text-secondary);">
+              <tr class="border-b" style="border-color: var(--border); color: var(--text-tertiary);">
                 <th class="text-left pb-4 font-normal">Dataset</th>
                 <th class="text-left pb-4 font-normal">Vectors</th>
                 <th class="text-left pb-4 font-normal">Latency (p99)</th>
@@ -154,7 +154,7 @@ const { Content } = await project.render();
     <!-- Production Readiness / Features -->
     {project.data.features && (
       <section class="fade-in" style="animation-delay: 0.3s;">
-        <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-secondary);">// production-readiness</span>
+        <span class="font-mono text-[0.85rem] font-medium block mb-6" style="color: var(--text-tertiary);">//production-readiness</span>
         <div class="grid md:grid-cols-2 gap-12">
           {project.data.features.map((feature) => (
             <div>

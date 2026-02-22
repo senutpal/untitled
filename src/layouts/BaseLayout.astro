@@ -9,7 +9,7 @@ const { title, description = "utpal's portfolio — full-stack developer, ai/ml,
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 import '../styles/global.css';
-import StatusBar from '../components/StatusBar.astro';
+import ThemeToggle from '../components/ui/ThemeToggle.astro';
 ---
 
 <!DOCTYPE html>
@@ -59,9 +59,10 @@ import StatusBar from '../components/StatusBar.astro';
     }
   </script>
 </head>
-<body class="pb-24">
+<body>
+  <ThemeToggle />
   <slot />
-  <StatusBar />
+  <div class="page-tagline">create. explore. expand. conquer.</div>
 
   <!-- Fade-in observer -->
   <script is:inline>

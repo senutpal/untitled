@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import SectionHeader from './SectionHeader.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
 
 const allReading = await getCollection('reading');
 const books = allReading.filter((r) => r.data.type === 'book');
@@ -23,13 +23,15 @@ const typeLabels: Record<string, { cta: string }> = {
       { label: 'videos', items: videos },
     ].map(({ label, items }) => (
       <div>
-        <h3 class="font-mono text-xs mb-4" style="color: var(--text-secondary);">{label}</h3>
+        <h3 class="font-mono text-xs mb-4" style="color: var(--text-tertiary);">{label}</h3>
         <div class="space-y-4">
           {items.map((item) => (
-            <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8 group cursor-pointer">
+            <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8">
               <div class="grow">
-                <h4 class="font-semibold transition-colors" style="color: var(--text-primary);">{item.data.title}</h4>
-                <p class="text-sm mt-1" style="color: var(--text-secondary);">
+                <a href={`/reading/${item.slug}`} class="no-underline group">
+                  <h4 class="font-semibold text-text-primary transition-colors underline decoration-transparent group-hover:decoration-current underline-offset-4 group-hover:text-accent-blue">{item.data.title}</h4>
+                </a>
+                <p class="text-sm mt-1" style="color: var(--text-tertiary);">
                   {item.data.author}
                   {item.data.status === 'reading' && ' · currently reading'}
                   {item.data.status === 'on-deck' && ' · on deck'}
@@ -37,9 +39,10 @@ const typeLabels: Record<string, { cta: string }> = {
                 </p>
               </div>
               <a
-                href={`/reading/${item.slug}`}
-                class="font-mono text-xs transition-colors shrink-0"
-                style="color: var(--text-secondary);"
+                href={item.data.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-mono text-xs text-text-tertiary transition-colors shrink-0 no-underline hover:text-accent hover:underline underline-offset-4"
               >
                 {typeLabels[item.data.type].cta}
               </a>
