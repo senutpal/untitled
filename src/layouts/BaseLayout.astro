@@ -5,7 +5,7 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description = "utpal's portfolio — full-stack developer, ai/ml, devops, distributed systems", ogImage } = Astro.props;
+const { title, description = "Utpal Sen's portfolio — full-stack developer, ai/ml, devops, distributed systems", ogImage } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 import '../styles/global.css';
@@ -42,7 +42,7 @@ import ThemeToggle from '../components/ui/ThemeToggle.astro';
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Utpal",
+    "name": "Utpal Sen",
     "url": "https://utpal.dev",
     "jobTitle": "Full-Stack Developer",
     "knowsAbout": ["AI/ML", "DevOps", "Distributed Systems", "Full-Stack Development"],
