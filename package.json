@@ -1,5 +1,5 @@
 {
-  "name": "utpal-dev",
+  "name": "utpal-sen",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
-    "@astrojs/node": "^9.5.3",
     "@astrojs/react": "^4.4.2",
     "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/vercel": "^9.0.4",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.17.2",
     "lucide-react": "^0.574.0",
