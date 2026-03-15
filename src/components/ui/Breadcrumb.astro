@@ -1,0 +1,26 @@
+---
+interface BreadcrumbSegment {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  path: BreadcrumbSegment[];
+}
+
+const { path } = Astro.props;
+---
+
+<nav class="breadcrumb fade-in">
+  <a href="/" class="breadcrumb-link breadcrumb-home"><span>~</span> <span class="breadcrumb-sep">/</span> <span>home</span></a>
+  {path.map((segment, i) => (
+    <>
+      <span class="breadcrumb-sep">/</span>
+      {i < path.length - 1 && segment.href ? (
+        <a href={segment.href} class="breadcrumb-link">{segment.label}</a>
+      ) : (
+        <span class="breadcrumb-current">{segment.label}</span>
+      )}
+    </>
+  ))}
+</nav>

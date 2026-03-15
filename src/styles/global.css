@@ -173,7 +173,37 @@ body {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
   margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
 }
+.breadcrumb-link {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+}
+.breadcrumb-link:hover {
+  color: var(--accent);
+}
+.breadcrumb-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.breadcrumb-sep {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.breadcrumb-current {
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 
 /* Filter tag */
 .filter-tag {
