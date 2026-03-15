@@ -1,18 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import GutterColumn from '../components/ui/GutterColumn.astro';
+import Breadcrumb from '../components/ui/Breadcrumb.astro';
 ---
 
 <BaseLayout title="resume — Utpal Sen" description="Utpal Sen's resume — full-stack developer, ai/ml, devops, distributed systems">
-  <GutterColumn />
-  <main class="max-w-3xl mx-auto px-6 md:px-0 md:pl-16 pt-16 md:pt-24 space-y-24">
+
+  <main class="max-w-3xl mx-auto px-6 md:px-0 pt-16 md:pt-24 space-y-24">
 
     <!-- Header -->
     <section class="fade-in">
+      <Breadcrumb path={[{ label: "resume" }]} />
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <h1 class="text-4xl font-medium tracking-tight mb-2" style="color: var(--text-primary);">curriculum vitae</h1>
-          <p class="font-mono text-sm" style="color: var(--text-tertiary);">utpal@dev:~/resume.pdf</p>
         </div>
         <div>
           <a href="#" class="inline-flex items-center gap-2 px-4 py-2 border rounded-sm font-mono text-xs transition-all shadow-sm" style="background-color: var(--surface); border-color: var(--border); color: var(--text-primary);">
